@@ -9,6 +9,7 @@ __pycache__/
 # other folders
 /site
 /_warehouse
+/.idea
 
 # files
 *.cache
