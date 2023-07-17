@@ -25,7 +25,7 @@ variables:
   setext_escape: ^(?=[ ]{,3}(?:=+|-+)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
 
   block_quote: (?:[ ]{,3}(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
-  indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
+  # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
 
   first_list_item: (?:[ ]{,3}(?:1[.)]|[*+-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
   list_item: (?:[ ]{,3}(?:\d{1,9}[.)]|[*+-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
@@ -880,10 +880,10 @@ contexts:
 
 ###[ LEAF BLOCKS: INDENTED CODE BLOCKS ]######################################
 
-  indented-code-blocks:
-    # https://spec.commonmark.org/0.30/#indented-code-blocks
-    - match: '{{indented_code_block}}.*$\n?'
-      scope: markup.raw.block.markdown
+# indented-code-blocks:
+#   # https://spec.commonmark.org/0.30/#indented-code-blocks
+#   - match: '{{indented_code_block}}.*$\n?'
+#     scope: markup.raw.block.markdown
 
 ###[ LEAF BLOCKS: FENCED CODE BLOCKS ]########################################
 
@@ -2476,7 +2476,6 @@ contexts:
           |   {{atx_heading}}
           |   {{block_quote}}
           |   {{fenced_code_block_start}}
-          |   {{indented_code_block}}
           |   {{thematic_break}}
           )
       pop: true

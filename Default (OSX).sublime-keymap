@@ -593,6 +593,18 @@
 			{ "key": "setting.mde.keymap_disable.goto_next_heading", "operator": "not_equal", "operand": true }
 		]
 	},
+	{ "keys": ["ctrl+shift+pageup"], "command": "mde_goto_previous_day_heading", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
+			{ "key": "setting.mde.keymap_disable.goto_previous_heading", "operator": "not_equal", "operand": true }
+		]
+	},
+	{ "keys": ["ctrl+shift+pagedown"], "command": "mde_goto_next_day_heading", "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
+			{ "key": "setting.mde.keymap_disable.goto_next_heading", "operator": "not_equal", "operand": true }
+		]
+	},
 
 	//
 	// Folding

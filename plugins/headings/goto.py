@@ -1,7 +1,58 @@
 import sublime
 
-from .common import all_headings
+from .common import all_headings, all_day_headings
 from ..view import MdeTextCommand
+
+
+
+
+class MdeGotoNextDayHeadingCommand(MdeTextCommand):
+    def run(self, edit):
+        view = self.view
+        day_headings = tuple(all_day_headings(view))
+        new_sel = []
+        for sel in view.sel():
+            for title_begin, title_end in day_headings:
+                if title_begin > sel.begin():
+                    new_sel.append(sublime.Region(title_begin, title_end))
+                    break
+
+        if not new_sel:
+            sublime.status_message("No day heading can be found")
+            return
+
+        view.sel().clear()
+        view.sel().add_all(new_sel)
+        view.show(new_sel[-1])
+
+
+class MdeGotoPreviousDayHeadingCommand(MdeTextCommand):
+    def run(self, edit, same_level=True):
+        view = self.view
+        day_headings = tuple(all_day_headings(view))
+        new_sel = []
+        max_level = 0
+        last_level = 0
+        for sel in view.sel():
+            found = False
+            for title_begin, title_end in day_headings:
+                if title_end < sel.begin():
+                    prev = (title_begin, title_end)
+                    found = True
+                else:
+                    break
+            if found:
+                title_begin, title_end = prev
+                new_sel.append(sublime.Region(title_begin, title_end))
+                break
+
+        if not new_sel:
+            sublime.status_message("No day heading can be found")
+            return
+
+        view.sel().clear()
+        view.sel().add_all(new_sel)
+        view.show(new_sel[-1])
 
 
 class MdeGotoNextHeadingCommand(MdeTextCommand):

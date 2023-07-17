@@ -15,6 +15,12 @@ HEADINGS_RE = re.compile(
 )
 
 
+DAY_HEADINGS_RE = re.compile(
+    r"^(?:-{6,}\n)(\d{1,2} [A-Z][a-z]{2,3} 20\d{2}$)", 
+    re.M
+)
+
+
 def all_headings(view, start=0, end=None):
     if end is None:
         end = view.size()
@@ -31,6 +37,19 @@ def all_headings(view, start=0, end=None):
         # ignore front matter and raw code blocks
         if view.match_selector(title_begin, "- markup.raw"):
             yield (title_begin, title_end, level)
+    return None
+
+
+def all_day_headings(view, start=0, end=None):
+    if end is None:
+        end = view.size()
+    text = view.substr(sublime.Region(start, end))
+    for m in DAY_HEADINGS_RE.finditer(text):
+        title_begin = start + m.start(1)
+        title_end = start + m.end(1)
+        # ignore front matter and raw code blocks
+        if view.match_selector(title_begin, "- markup.raw"):
+            yield (title_begin, title_end)
     return None
 
 

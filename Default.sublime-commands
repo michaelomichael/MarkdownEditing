@@ -140,6 +140,14 @@
 		"command": "mde_goto_previous_heading",
 		"args": { "same_level": false }
 	},
+	{
+		"caption": "MarkdownEditing: Goto Previous Day Heading",
+		"command": "mde_goto_previous_day_heading"
+	},
+	{
+		"caption": "MarkdownEditing: Goto Next Day Heading",
+		"command": "mde_goto_next_day_heading"
+	},
 
 	//
 	// Folding

@@ -52,6 +52,8 @@ else:
         MdeCompleteUnderlinedHeadingsCommand,
         MdeConvertUnderlinedHeadingsToAtxCommand,
         MdeFixUnderlinedHeadingsCommand,
+        MdeGotoNextDayHeadingCommand,
+        MdeGotoPreviousDayHeadingCommand,
         MdeGotoNextHeadingCommand,
         MdeGotoPreviousHeadingCommand,
         MdeMatchHeadingHashesCommand,
