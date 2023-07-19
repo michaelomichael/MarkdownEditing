@@ -9,7 +9,7 @@
 		"tickbox_started": "var(orange3)",
 		"tickbox_done": "hsl(114, 20%, 50%)",
 		"tickbox_abandoned": "var(raw_fg)",
-		"day_heading": "hsl(45, 94%, 68%)"
+		"day_heading": "hsl(45, 74%, 68%)"
 	},
 	"rules": [
 		{
