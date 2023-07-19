@@ -16,5 +16,8 @@ trim_trailing_whitespace = false
 [*.sublime-*]
 indent_style = tab
 
+[*.sublime-syntax]
+indent_size = 2
+
 [*.tmPreferences]
 indent_style = tab
