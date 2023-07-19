@@ -27,8 +27,8 @@ variables:
   block_quote: (?:[ ]{,3}(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
   # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
 
-  first_list_item: (?:[ ]{,3}(?:1[.)]|[*+-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
-  list_item: (?:[ ]{,3}(?:\d{1,9}[.)]|[*+-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
+  first_list_item: (?:[ ]{,3}(?:1[.)]|[*+•-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
+  list_item: (?:[ ]{,3}(?:\d{1,9}[.)]|[*+•-])\s)       # between 0 and 3 spaces, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus or dash), followed by whitespace
 
   thematic_break: |-
     (?x:
@@ -525,7 +525,7 @@ contexts:
 ###[ CONTAINER BLOCKS: BLOCK QUOTES > LIST BLOCKS ]###########################
 
   block-quote-list-block:
-    - match: ([ \t]*)([*+-])((?:[ ](\[)([ xX])(\]))?\s)
+    - match: ([ \t]*)([*+•-])((?:[ ](\[)([ xX])(\]))?\s)
       captures:
         1: markup.list.unnumbered.markdown
         2: markup.list.unnumbered.bullet.markdown punctuation.definition.list_item.markdown
@@ -625,7 +625,7 @@ contexts:
 ###[ CONTAINER BLOCKS: LISTS ]################################################
 
   list-blocks:
-    - match: ([ \t]*)([*+-])((?:[ ](\[)([ xX])(\]))?\s)
+    - match: ([ \t]*)([*+•-])((?:[ ](\[)([ xX])(\]))?\s)
       captures:
         1: markup.list.unnumbered.markdown
         2: markup.list.unnumbered.bullet.markdown punctuation.definition.list_item.markdown
@@ -671,7 +671,7 @@ contexts:
     - include: list-items
 
   list-items:
-    - match: ([ \t]*)([*+-])((?:[ ](\[)([ xX])(\]))?\s)
+    - match: ([ \t]*)([*+•-])((?:[ ](\[)([ xX])(\]))?\s)
       captures:
         1: markup.list.unnumbered.markdown
         2: markup.list.unnumbered.bullet.markdown punctuation.definition.list_item.markdown
