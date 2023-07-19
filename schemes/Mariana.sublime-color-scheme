@@ -4,11 +4,60 @@
 	"variables": {
 		"line_break": "hsl(210, 15%, 20%)",
 		"raw_fg": "hsl(210, 10%, 60%)",
-		"raw_bg": "hsl(210, 15%, 20%)"
+		"raw_bg": "hsl(210, 15%, 20%)",
+		"tickbox_todo": "var(red)",
+		"tickbox_started": "var(orange3)",
+		"tickbox_done": "hsl(114, 31%, 50%)",
+		"tickbox_abandoned": "var(raw_fg)",
+		"day_heading": "hsl(45, 94%, 68%)"
 	},
 	"rules": [
+		{
+			"scope": "markup.heading.0.markdown",
+			"foreground": "var(day_heading)",
+			"font_style": ""
+		},
+		{
+			"scope": "markup.heading.0.markdown entity.name.section.markdown",
+			"foreground": "var(white)",
+			"font_style": ""
+		},
 
 		// Basic Formattings
+		{
+			"scope": "punctuation.definition.tickbox.todo",
+			"font_style": "bold",
+			"foreground": "var(tickbox_todo)"
+		},
+		{
+			"scope": "punctuation.definition.tickbox.started",
+			"foreground": "var(tickbox_started)"
+		},
+		{
+			"scope": "punctuation.definition.tickbox.centre.started",
+			"font_style": "bold",
+			"foreground": "var(tickbox_started)"
+		},
+		{
+			"scope": "punctuation.definition.tickbox.done",
+			"foreground": "var(tickbox_done)"
+		},
+		{
+			"scope": "punctuation.definition.tickbox.centre.done",
+			"font_style": "bold",
+			"foreground": "var(tickbox_done)"
+		},
+		{
+			"scope": "punctuation.definition.tickbox.abandoned, punctuation.definition.tickbox.centre.abandoned",
+			"foreground": "var(tickbox_abandoned)"
+		},
+		{
+			"name": "Fenced Code Block Language Name",
+			"scope": "text.html.markdown constant.other.language-name.markdown",
+			"font_style": "italic",
+			"foreground": "hsl(210, 15%, 30%)"
+		},
+
 		{
 			"name": "Markdown: Bold Content",
 			"scope": "text.html.markdown markup.bold - punctuation.definition.bold",

@@ -22,7 +22,7 @@ variables:
   atx_heading: (?:[ ]{,3}[#]{1,6}(?:[ \t]|$))         # between 0 and 3 spaces, followed 1 to 6 hashes, followed by at least one space or tab or by end of the line
   atx_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `atx_heading_end` can fully match closing hashes
   atx_heading_end: (?:[ \t]+(#+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
-  setext_escape: ^(?=[ ]{,3}(?:=+|-+)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
+  setext_escape: ^(?=[ ]{,3}(?:=+|-+|[═╦╚╝]+|║[^║]+║)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
 
   block_quote: (?:[ ]{,3}(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
   # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
@@ -329,7 +329,30 @@ contexts:
     - include: atx-headings
     - include: setext-headings-or-paragraphs
 
-###[ CONTAINER BLOCKS: BLOCK QUOTES ]#########################################
+
+  tick-boxes:
+    - match: (?<!\S)\s*(\[)( )(\])
+      captures:
+        1: punctuation.definition.tickbox.todo
+        2: punctuation.definition.tickbox.centre.todo
+        3: punctuation.definition.tickbox.todo
+    - match: ^\s*(\[)(√)(\])
+      captures:
+        1: punctuation.definition.tickbox.done
+        2: punctuation.definition.tickbox.centre.done
+        3: punctuation.definition.tickbox.done
+    - match: ^\s*(\[)(\.)(\])
+      captures:
+        1: punctuation.definition.tickbox.started
+        2: punctuation.definition.tickbox.centre.started
+        3: punctuation.definition.tickbox.started
+    - match: ^\s*(\[)(x)(\])
+      captures:
+        1: punctuation.definition.tickbox.abandoned
+        2: punctuation.definition.tickbox.centre.abandoned
+        3: punctuation.definition.tickbox.abandoned
+
+  ###[ CONTAINER BLOCKS: BLOCK QUOTES ]#########################################
 
   block-quotes:
     # https://spec.commonmark.org/0.30/#block-quotes
@@ -828,12 +851,28 @@ contexts:
     # as heading underline. This is achieved by consuming them here, which also
     # applies `meta.paragraph` scope as expected.
     # A line of dashes is already matched as thematic break and thus ignored.
-    - match: ^[ ]{,3}(?:=+|(?=\S))
+    - match: ^[ \t]{,13}(?:=+|(?=\S))
       branch_point: setext-headings-or-paragraphs
       branch:
+        - setext-heading0
         - paragraph
         - setext-heading2
         - setext-heading1
+
+  setext-heading0:
+    - match: ^[╦═]+[ \t]*$
+      scope: markup.heading.0.markdown
+      pop: true
+    - match: "(║)([ A-Za-z0-9]+)(║)"
+      scope: markup.heading.0.markdown
+      captures:
+        2: entity.name.section.markdown
+      pop: true
+    - match: "╚═+╝"
+      scope: markup.heading.0.markdown
+      pop: true
+    - match: ^[^ \t╚═╝╦║]*$
+      fail: setext-headings-or-paragraphs
 
   setext-heading1:
     # https://spec.commonmark.org/0.30/#setext-headings
@@ -2517,6 +2556,7 @@ contexts:
 ###[ INLINE ]#################################################################
 
   inlines:
+    - include: tick-boxes
     - include: hard-line-breaks
     - include: emphasis
     - include: images
