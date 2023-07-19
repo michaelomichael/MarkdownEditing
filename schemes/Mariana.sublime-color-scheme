@@ -7,7 +7,7 @@
 		"raw_bg": "hsl(210, 15%, 20%)",
 		"tickbox_todo": "var(red)",
 		"tickbox_started": "var(orange3)",
-		"tickbox_done": "hsl(114, 31%, 50%)",
+		"tickbox_done": "hsl(114, 20%, 50%)",
 		"tickbox_abandoned": "var(raw_fg)",
 		"day_heading": "hsl(45, 94%, 68%)"
 	},
