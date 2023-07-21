@@ -2556,7 +2556,7 @@ contexts:
 ###[ INLINE ]#################################################################
 
   inlines:
-    - include: tick-boxes
+#    - include: tick-boxes
     - include: hard-line-breaks
     - include: emphasis
     - include: images
