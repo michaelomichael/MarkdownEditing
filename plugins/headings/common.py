@@ -16,8 +16,22 @@ HEADINGS_RE = re.compile(
 
 
 DAY_HEADINGS_RE = re.compile(
-    r"^(?:-{6,}\n)(\d{1,2} [A-Z][a-z]{2,3} 20\d{2}$)", 
-    re.M
+    r"""
+        ^(?:    # Old-style headers: a long line of dashes, with a date starting on the next line
+          -{6,} \n
+          (
+            \d{1,2} [ ] [A-Z][a-z]{2,3} [ ] 20\d{2}
+          )
+        |       # New-style headers (box border)
+          [\u2550x\u2566]+ [ ]* \n    # straight line (═ and ╦) on line 1
+          [ ]* \u2551[ ]              # date on line two between ║ symbols
+          (
+            \d{1,2} [ ] [A-Za-z]{3,4} [ ] \d{4}
+          )
+          [ ] \u2551 [ ]*
+        )$
+    """,
+    re.UNICODE | re.M | re.X
 )
 
 
@@ -45,8 +59,12 @@ def all_day_headings(view, start=0, end=None):
         end = view.size()
     text = view.substr(sublime.Region(start, end))
     for m in DAY_HEADINGS_RE.finditer(text):
-        title_begin = start + m.start(1)
-        title_end = start + m.end(1)
+        if m.group(1):
+            title_begin = start + m.start(1)
+            title_end = start + m.end(1)
+        else:
+            title_begin = start + m.start(2)
+            title_end = start + m.end(2)
         # ignore front matter and raw code blocks
         if view.match_selector(title_begin, "- markup.raw"):
             yield (title_begin, title_end)
