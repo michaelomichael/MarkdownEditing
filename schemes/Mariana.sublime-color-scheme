@@ -1,5 +1,27 @@
 // This patch for Mariana.sublime-color-scheme adds some Markdown specific color definitions
 // while making use of well defined colors for code blocks.
+//
+// Colours defined in Mariana:
+//     - black
+//     - blue
+//     - blue
+//     - blue2
+//     - blue3
+//     - blue4
+//     - blue5
+//     - blue6
+//     - green
+//     - grey
+//     - orange
+//     - orange2
+//     - orange3
+//     - pink
+//     - red
+//     - red2
+//     - white
+//     - white2
+//     - white3
+
 {
 	"variables": {
 		"line_break": "hsl(210, 15%, 20%)",
@@ -129,7 +151,7 @@
 		{
 			"name": "Markdown: Block Quotes",
 			"scope": "text.html.markdown markup.quote punctuation.definition.blockquote, text.html.markdown markup.quote punctuation.definition.quote",
-			"foreground": "var(blue2)",
+			"foreground": "var(orange2)",
 			"background": "var(blue2)"
 		},
 
