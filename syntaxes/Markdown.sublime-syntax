@@ -781,7 +781,7 @@ contexts:
         )
       pop: true
 
-  ###[ LEAF BLOCKS: ATX HEADINGS ]##############################################
+###[ LEAF BLOCKS: ATX HEADINGS ]##############################################
 
   atx-headings:
     # https://spec.commonmark.org/0.30/#atx-headings
@@ -858,7 +858,7 @@ contexts:
 
 
 
-  ###[ LEAF BLOCKS: DAY HEADINGS ]##############################################
+###[ LEAF BLOCKS: DAY HEADINGS ]##############################################
 
   day-headings:
     # Note:
@@ -895,7 +895,7 @@ contexts:
     # as heading underline. This is achieved by consuming them here, which also
     # applies `meta.paragraph` scope as expected.
     # A line of dashes is already matched as thematic break and thus ignored.
-    - match: ^[ \t]{,13}(?:=+|(?=\S))
+    - match: ^[ \t]{,3}(?:=+|(?=\S))
       branch_point: setext-headings-or-paragraphs
       branch:
         - paragraph
