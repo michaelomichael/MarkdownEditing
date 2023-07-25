@@ -8,13 +8,12 @@
 		"tickbox_todo": "var(red)",
 		"tickbox_started": "var(orange3)",
 		"tickbox_done": "hsl(114, 20%, 50%)",
-		"tickbox_abandoned": "var(raw_fg)",
-		"day_heading": "hsl(45, 74%, 68%)"
+		"tickbox_abandoned": "var(raw_fg)"
 	},
 	"rules": [
 		{
-			"scope": "markup.heading.0.markdown",
-			"foreground": "var(day_heading)",
+			"scope": "markup.heading.0.markdown punctuation.definition.heading.begin.markdown, markup.heading.0.markdown punctuation.definition.heading.end.markdown",
+			"foreground": "var(pink)",
 			"font_style": ""
 		},
 		{

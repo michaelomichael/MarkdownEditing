@@ -24,6 +24,10 @@ variables:
   atx_heading_end: (?:[ \t]+(#+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
   setext_escape: ^(?=[ ]{,3}(?:=+|-+|[═╦╚╝]+|║[^║]+║)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
 
+  day_heading: (?:[ ]{,3}[═╦║╚╝]+(?:[ \t]|$))         # between 0 and 3 spaces, followed by one or more box border characters, followed by at least one space/tab or by end of line
+  day_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `day_heading_end` can fully match closing hashes
+  day_heading_end: (?:[ \t]+([═╦║╚╝]+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
+
   block_quote: (?:[ ]{,3}(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
   # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
 
@@ -241,6 +245,7 @@ variables:
       ^(?=\s*$                        # the line is blank (or only contains whitespace)
        |  {{block_quote}}             # a blockquote begins the line
        |  {{atx_heading}}             # an ATX heading begins the line
+       |  {{day_heading}}             # a day heading begins the line
        |  {{fenced_code_block_start}} # a fenced codeblock begins the line
        |  {{thematic_break}}          # line is a thematic beak
        |  {{first_list_item}}         # a list item begins the line
@@ -327,6 +332,7 @@ contexts:
     - include: latex-blocks
     - include: reference-definitions
     - include: atx-headings
+    - include: day-headings
     - include: setext-headings-or-paragraphs
 
 
@@ -382,6 +388,7 @@ contexts:
   block-quote-common:
     - include: thematic-breaks
     - include: atx-headings
+    - include: day-headings
     - include: block-quote-reference-definitions
     - include: block-quote-fenced-code-block
     - include: block-quote-list-block
@@ -499,6 +506,7 @@ contexts:
            (?: $                           # the line is blank (or only contains whitespace)
            |   {{reference_definition}}    # a reference definition begins the line
            |   {{atx_heading}}             # an ATX heading begins the line
+           |   {{day_heading}}             # a day heading begins the line
            |   {{fenced_code_block_start}} # a fenced codeblock begins the line
            |   {{thematic_break}}          # line is a thematic beak
            |   {{list_item}}               # a list item begins the line
@@ -610,6 +618,7 @@ contexts:
         ^(?= (?:[ \t]*>)* [ \t]*
            (?: $                           # the line is blank (or only contains whitespace)
            |   {{atx_heading}}             # an ATX heading begins the line
+           |   {{day_heading}}             # a day heading begins the line
            |   {{fenced_code_block_start}} # a fenced codeblock begins the line
            |   {{thematic_break}}          # line is a thematic beak
            |   {{list_item}}               # a list item begins the line
@@ -637,6 +646,7 @@ contexts:
         ^(?= (?:[ \t]{,3}>)*
            (?: \s* $                       # the line is blank (or only contains whitespace)
            |   {{atx_heading}}             # an ATX heading begins the line
+           |   {{day_heading}}             # a day heading begins the line
            |   {{fenced_code_block_start}} # a fenced codeblock begins the line
            |   {{thematic_break}}          # line is a thematic beak
            |   {{list_item}}               # a list item begins the line
@@ -691,6 +701,7 @@ contexts:
   list-block-common:
     - include: thematic-breaks
     - include: atx-headings
+    - include: day-headings
     - include: list-items
 
   list-items:
@@ -761,6 +772,7 @@ contexts:
           (?: $                           # the line is blank (or only contains whitespace)
           |   {{block_quote}}             # a blockquote begins the line
           |   {{atx_heading}}             # an ATX heading begins the line
+          |   {{day_heading}}             # a day heading begins the line
           |   {{fenced_code_block_start}} # a fenced codeblock begins the line
           |   {{thematic_break}}          # line is a thematic beak
           |   {{list_item}}               # a list item begins the line
@@ -769,7 +781,7 @@ contexts:
         )
       pop: true
 
-###[ LEAF BLOCKS: ATX HEADINGS ]##############################################
+  ###[ LEAF BLOCKS: ATX HEADINGS ]##############################################
 
   atx-headings:
     # https://spec.commonmark.org/0.30/#atx-headings
@@ -844,6 +856,38 @@ contexts:
     - include: literals
     - include: links
 
+
+
+  ###[ LEAF BLOCKS: DAY HEADINGS ]##############################################
+
+  day-headings:
+    # Note:
+    #   Consume spaces and tabs after opening hashes so entity.name
+    #   starts with first non-whitespace character,
+    #   but don't do so if directly followed by closing hashes
+    #   as terminator pattern requires them to match then.
+    - match: '[ \t]*([═╦║╚╝]+){{day_heading_space}}'
+      captures:
+        1: punctuation.definition.heading.begin.markdown
+      push: day-heading0-content
+
+  day-heading0-content:
+    - meta_scope: markup.heading.0.markdown
+    - meta_content_scope: entity.name.section.markdown
+    - include: day-heading-content
+
+  day-heading-content:
+    - match: '{{day_heading_end}}'
+      captures:
+        1: punctuation.definition.heading.end.markdown
+        2: meta.whitespace.newline.markdown
+      pop: true
+    - include: emphasis
+    - include: images
+    - include: literals
+    - include: links
+
+
 ###[ LEAF BLOCKS: SETEXT HEADINGS OR PARAGRAPH ]##############################
 
   setext-headings-or-paragraphs:
@@ -854,25 +898,9 @@ contexts:
     - match: ^[ \t]{,13}(?:=+|(?=\S))
       branch_point: setext-headings-or-paragraphs
       branch:
-        - setext-heading0
         - paragraph
         - setext-heading2
         - setext-heading1
-
-  setext-heading0:
-    - match: ^[╦═]+[ \t]*$
-      scope: markup.heading.0.markdown
-      pop: true
-    - match: "(║)([ A-Za-z0-9]+)(║)"
-      scope: markup.heading.0.markdown
-      captures:
-        2: entity.name.section.markdown
-      pop: true
-    - match: "╚═+╝"
-      scope: markup.heading.0.markdown
-      pop: true
-    - match: ^[^ \t╚═╝╦║]*$
-      fail: setext-headings-or-paragraphs
 
   setext-heading1:
     # https://spec.commonmark.org/0.30/#setext-headings
@@ -2418,6 +2446,7 @@ contexts:
            (?: $                           # the line is blank (or only contains whitespace)
            |   {{reference_definition}}    # a reference definition begins the line
            |   {{atx_heading}}             # an ATX heading begins the line
+           |   {{day_heading}}             # a day heading begins the line
            |   {{fenced_code_block_start}} # a fenced codeblock begins the line
            |   {{thematic_break}}          # line is a thematic beak
            |   {{list_item}}               # a list item begins the line
@@ -2513,6 +2542,7 @@ contexts:
           (?x)^
           (?= \s*$
           |   {{atx_heading}}
+          |   {{day_heading}}
           |   {{block_quote}}
           |   {{fenced_code_block_start}}
           |   {{thematic_break}}
