@@ -44,6 +44,11 @@
 			"font_style": ""
 		},
 
+		{
+			"scope": "markup.heading.3.markdown punctuation.definition.heading.begin.markdown, markup.heading.3.markdown punctuation.definition.heading.end.markdown, markup.heading.4.markdown punctuation.definition.heading.begin.markdown, markup.heading.4.markdown punctuation.definition.heading.end.markdown, markup.heading.5.markdown punctuation.definition.heading.begin.markdown, markup.heading.5.markdown punctuation.definition.heading.end.markdown, markup.heading.6.markdown punctuation.definition.heading.begin.markdown, markup.heading.6.markdown punctuation.definition.heading.end.markdown",
+			"foreground": "var(orange3)",
+		},
+
 		// Basic Formattings
 		{
 			"scope": "punctuation.definition.tickbox.todo",
