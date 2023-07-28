@@ -19,16 +19,16 @@ file_extensions:
   - markdn
 
 variables:
-  atx_heading: (?:[ ]{,3}[#]{1,6}(?:[ \t]|$))         # between 0 and 3 spaces, followed 1 to 6 hashes, followed by at least one space or tab or by end of the line
+  atx_heading: (?:[ ]*[#]{1,6}(?:[ \t]|$))         # between 0 and 3 spaces, followed 1 to 6 hashes, followed by at least one space or tab or by end of the line
   atx_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `atx_heading_end` can fully match closing hashes
   atx_heading_end: (?:[ \t]+(#+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
-  setext_escape: ^(?=[ ]{,3}(?:=+|-+|[═╦╚╝]+|║[^║]+║)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
+  setext_escape: ^(?=[ ]*(?:=+|-+)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
 
   day_heading: (?:[ ]{,3}[═╦║╚╝]+(?:[ \t]|$))         # between 0 and 3 spaces, followed by one or more box border characters, followed by at least one space/tab or by end of line
   day_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `day_heading_end` can fully match closing hashes
   day_heading_end: (?:[ \t]+([═╦║╚╝]+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
 
-  block_quote: (?:[ ]{,3}(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
+  block_quote: (?:[ ]*(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
   # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
 
   first_list_item: (?:[ \t]*(?:1[.)]|[*+•-])\s)       # optional spaces/tabs, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus, or dash), followed by whitespace
@@ -36,7 +36,7 @@ variables:
 
   thematic_break: |-
     (?x:
-      [ ]{,3}                    # between 0 to 3 spaces
+      [ ]*                       # zero or more spaces
       (?:                        # followed by one of the following:
         [-](?:[ \t]*[-]){2,}     # - a dash,        followed by the following at least twice: any number of spaces or tabs followed by a dash
       | [*](?:[ \t]*[*]){2,}     # - a star,        followed by the following at least twice: any number of spaces or tabs followed by a star
@@ -162,7 +162,7 @@ variables:
   # https://spec.commonmark.org/0.30/#html-blocks
   html_block: |-
     (?x:
-      [ ]{,3}
+      [ ]*
       (?:
         \$\$                                 # a latex math block begins the line
       | {{html_tag_block_end_at_close_tag}}  # html block type 1
@@ -362,7 +362,7 @@ contexts:
 
   block-quotes:
     # https://spec.commonmark.org/0.30/#block-quotes
-    - match: '[ \t]{,3}(>)[ ]?'
+    - match: '[ \t]*(>)[ ]?'
       captures:
         1: punctuation.definition.blockquote.markdown
       push:
@@ -398,7 +398,7 @@ contexts:
       pop: true
 
   block-quote-punctuations:
-    - match: ^[ \t]{,3}(>)[ ]?
+    - match: ^[ \t]*(>)[ ]?
       captures:
         1: punctuation.definition.blockquote.markdown
       push: block-quote-punctuation-body
@@ -408,7 +408,7 @@ contexts:
     - include: immediately-pop
 
   block-quote-punctuation-content:
-    - match: '[ \t]{,3}(>)[ ]?'
+    - match: '[ \t]*(>)[ ]?'
       captures:
         1: punctuation.definition.blockquote.markdown
 
@@ -643,7 +643,7 @@ contexts:
     - match: |-
         (?x)
         # pop out of this context if one of the following conditions are met:
-        ^(?= (?:[ \t]{,3}>)*
+        ^(?= (?:[ \t]*>)*
            (?: \s* $                       # the line is blank (or only contains whitespace)
            |   {{atx_heading}}             # an ATX heading begins the line
            |   {{day_heading}}             # a day heading begins the line
@@ -895,7 +895,7 @@ contexts:
     # as heading underline. This is achieved by consuming them here, which also
     # applies `meta.paragraph` scope as expected.
     # A line of dashes is already matched as thematic break and thus ignored.
-    - match: ^[ \t]{,3}(?:=+|(?=\S))
+    - match: ^[ \t]*(?:=+|(?=\S))
       branch_point: setext-headings-or-paragraphs
       branch:
         - paragraph
@@ -906,7 +906,7 @@ contexts:
     # https://spec.commonmark.org/0.30/#setext-headings
     - meta_scope: markup.heading.1.markdown
     - meta_content_scope: entity.name.section.markdown
-    - match: ^[ ]{,3}(=+)[ \t]*$(\n?)
+    - match: ^[ ]*(=+)[ \t]*$(\n?)
       captures:
         1: punctuation.definition.heading.setext.markdown
         2: meta.whitespace.newline.markdown
@@ -917,7 +917,7 @@ contexts:
     # https://spec.commonmark.org/0.30/#setext-headings
     - meta_scope: markup.heading.2.markdown
     - meta_content_scope: entity.name.section.markdown
-    - match: ^[ ]{,3}(-+)[ \t]*$(\n?)
+    - match: ^[ ]*(-+)[ \t]*$(\n?)
       captures:
         1: punctuation.definition.heading.setext.markdown
         2: meta.whitespace.newline.markdown
