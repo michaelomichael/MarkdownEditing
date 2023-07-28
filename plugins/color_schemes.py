@@ -99,6 +99,7 @@ def clear_color_schemes():
     clear_color_scheme("Markdown.sublime-settings")
     clear_color_scheme("Markdown GFM.sublime-settings")
     clear_color_scheme("MultiMarkdown.sublime-settings")
+    clear_color_scheme("Morkdown.sublime-settings")
 
 
 def clear_color_scheme(filename):
@@ -111,6 +112,7 @@ def clear_invalid_color_schemes():
     clear_invalid_color_scheme("Markdown.sublime-settings")
     clear_invalid_color_scheme("Markdown GFM.sublime-settings")
     clear_invalid_color_scheme("MultiMarkdown.sublime-settings")
+    clear_invalid_color_scheme("Morkdown.sublime-settings")
 
 
 def clear_invalid_color_scheme(filename):

@@ -44,6 +44,10 @@ def enable_native_markdown_package():
                 "MultiMarkdown.sublime-syntax",
                 "Packages/Markdown/MultiMarkdown.sublime-syntax",
             )
+            reassign_syntax(
+                "Morkdown.sublime-syntax",
+                "Packages/Markdown/Morkdown.sublime-syntax",
+            )
 
         sublime.set_timeout(reassign, 100)
 
@@ -58,14 +62,14 @@ def reassign_syntax(current_syntax, new_syntax):
 
 def bootstrap_syntax_assignments():
     """
-    Reassign syntax to all open Markdown, MultiMarkdown or Plain Text files.
+    Reassign syntax to all open Markdown, MultiMarkdown, Morkdown, or Plain Text files.
 
     Repair syntax assignments of open views after install or upgrade, in case
     old ones no longer exist.
     """
     markdown = "Packages/MarkdownEditing/syntaxes/Markdown.sublime-syntax"
     multimarkdown = "Packages/MarkdownEditing/syntaxes/MultiMarkdown.sublime-syntax"
-
+    morkdown = "Packages/MarkdownEditing/syntaxes/Morkdown.sublime-syntax"
     for window in sublime.windows():
         for view in window.views():
             syntax = view.settings().get("syntax")
@@ -76,6 +80,9 @@ def bootstrap_syntax_assignments():
                     continue
                 if syntax in ("MultiMarkdown.tmLanguage", "MultiMarkdown.sublime-syntax"):
                     view.assign_syntax(multimarkdown)
+                    continue
+                if syntax in ("Morkdown.tmLanguage", "Morkdown.sublime-syntax"):
+                    view.assign_syntax(morkdown)
                     continue
 
             file_name = view.file_name()
