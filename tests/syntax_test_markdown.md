@@ -2,6 +2,29 @@
 
 # TEST: Tabs ##################################################################
 
+## https://spec.commonmark.org/0.30/#example-1
+
+	foo	baz		bim
+| <- markup.raw.block.markdown
+|^^^^^^^^^^^^^ markup.raw.block.markdown
+
+## https://spec.commonmark.org/0.30/#example-2
+
+  	foo	baz		bim
+| <- markup.raw.block.markdown
+|^^^^^^^^^^^^^ markup.raw.block.markdown
+
+   	foo	baz		bim
+| <- markup.raw.block.markdown
+|^^^^^^^^^^^^^ markup.raw.block.markdown
+
+## https://spec.commonmark.org/0.30/#example-3
+
+    a	a
+    ὐ	a
+| <- markup.raw.block.markdown
+|^^^^^^^ markup.raw.block.markdown
+
 ## https://spec.commonmark.org/0.30/#example-4
 
   - foo
@@ -10,12 +33,21 @@
 | <- markup.list.unnumbered.markdown
 |^^^^ markup.list.unnumbered.markdown
 
+## https://spec.commonmark.org/0.30/#example-5
+
+- foo
+
+		bar
+| <- markup.list.unnumbered.markdown - markup.raw.block.markdown
+|^^^^^ markup.list.unnumbered.markdown - markup.raw.block.markdown
+
+> Note: `bar` should be indented code block, but ST can't reliably highlight it!
+
 ## https://spec.commonmark.org/0.30/#example-6
 
 >		foo
 | <- markup.quote.markdown punctuation.definition.blockquote.markdown
-|^^^^^^ markup.quote.markdown markup.paragraph.markdown
-| MO: Removed indented raw blocks 
+|^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-7
 
@@ -27,9 +59,8 @@
 
     foo
 	bar
-| <- meta.paragraph.markdown
-|^^^^ meta.paragraph.markdown
-| MO: Removed indented raw blocks
+| <- markup.raw.block.markdown
+|^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-9
 
@@ -109,8 +140,7 @@ these are raw ligatures - -- --- ---- ----- ===== ==== === == =
 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  - constant - keyword - variable
 
     -= += /= %= -- ++ ** !~ =~ ~~ <= >= => <=> // && == !=
-|   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  - constant - keyword - variable - punctuation
-| MO: Removed indented raw blocks
+|   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw - constant - keyword - variable - punctuation
 
 >  -= += /= %= -- ++ ** !~ =~ ~~ <= >= => <=> // && == !=
 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant - keyword - variable
@@ -212,6 +242,11 @@ bar
 
 `` \[\` ``
 |^^^^^^^^^ markup.raw.inline.markdown - constant.character.escape
+
+## https://spec.commonmark.org/0.30/#example-18
+
+    \[\]
+|^^^^^^^^ markup.raw.block.markdown - constant.character.escape
 
 ## https://spec.commonmark.org/0.30/#example-19
 
@@ -377,6 +412,11 @@ Note: current design doesn't support highlighting entities in info strings
 `f&ouml;&ouml;`
 |^^^^^^^^^^^^^ - constant.character.entity
 
+## https://spec.commonmark.org/0.30/#example-36
+
+    f&ouml;f&ouml;
+|   ^^^^^^^^^^^^^^ - constant.character.entity
+
 ## https://spec.commonmark.org/0.30/#example-37
 
 &#42;foo&#42;
@@ -484,18 +524,15 @@ __
 ## https://spec.commonmark.org/0.30/#example-48
 
     ***
-|<- meta.separator.thematic-break.markdown - punctuation
-|^^^ meta.separator.thematic-break.markdown - punctuation
-|   ^^^ meta.separator.thematic-break.markdown punctuation.definition.thematic-break.markdown
-| MO: Removed indented raw blocks
+|<- markup.raw.block.markdown
+|^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-49
 
 Foo
     ***
-| <- meta.separator.thematic-break.markdown
-|^^^^^^^ meta.separator.thematic-break.markdown
-| MO: Removed indented raw blocks
+| <- meta.paragraph.markdown
+|^^^^^^^ meta.paragraph.markdown
 
 ## https://spec.commonmark.org/0.30/#example-50
 
@@ -818,24 +855,19 @@ bar
    # foo
 | <- markup.heading.1.markdown
 |^^^^^^^^ markup.heading.1.markdown   
-          # foo
-| <- markup.heading.1.markdown
-|^^^^^^^^^ markup.heading.1.markdown   
 
 ## https://spec.commonmark.org/0.30/#example-69
 
     # foo
-| <- markup.heading.1.markdown - meta.paragraph.markdown
-|^^^^^^^^^ markup.heading.1.markdown - meta.paragraph.markdown
-| MO: Removed indented raw code blocks
+| <- markup.raw.block.markdown
+|^^^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-70
 
 foo
     # bar
-| <- markup.heading.1.markdown - meta.paragraph.markdown
-|^^^^^^^^^ markup.heading.1.markdown - meta.paragraph.markdown
-| MO: TODO: It would be nice if this was just treated as a paragraph
+| <- meta.paragraph.markdown - markup.heading
+|^^^^^^^^^ meta.paragraph.markdown - markup.heading
 
 ## https://spec.commonmark.org/0.30/#example-71
 
@@ -1146,20 +1178,12 @@ https://spec.commonmark.org/0.30/#example-85
 
     Foo
     ---
-| <- markup.heading.2.markdown - punctuation
-|^^^ markup.heading.2.markdown - punctuation
-|   ^^^ markup.heading.2.markdown punctuation.definition.heading.setext.markdown
-|      ^ markup.heading.2.markdown meta.whitespace.newline.markdown
-| MO: Removed indented raw code blocks
+|^^^^^^^ markup.raw.block.markdown
 
     Foo
-| <- markup.heading.2.markdown - entity - punctuation
-|   ^^^ markup.heading.2.markdown entity.name.section.markdown - punctuation
-| MO: It would be nice if we could check the _level_ of indentation, but we don't seem to be able to do that.
 ---
-| <- markup.heading.2.markdown punctuation.definition.heading.setext.markdown
-|^^ markup.heading.2.markdown punctuation.definition.heading.setext.markdown
-|  ^ markup.heading.2.markdown meta.whitespace.newline.markdown
+| <- meta.separator.thematic-break.markdown - markup.heading
+|^^^ meta.separator.thematic-break.markdown - markup.heading
 
 https://spec.commonmark.org/0.30/#example-86
 
@@ -1175,12 +1199,8 @@ https://spec.commonmark.org/0.30/#example-87
 
 Foo
     ---
-|^^^^^^ markup.heading.2.markdown
-|^^^ - punctuation
-|   ^^^ punctuation.definition.heading.setext.markdown
-|      ^ meta.whitespace.newline.markdown
-| MO: It would be nice if we could check the _level_ of indentation, but sublime 
-| won't let us do that reliably, so it's easier to just allow the setext heading here
+| <- meta.paragraph.markdown - markup.heading
+|^^^^^^^ meta.paragraph.markdown - markup.heading
 
 https://spec.commonmark.org/0.30/#example-88
 
@@ -1310,19 +1330,14 @@ Fenced codeblocks are no no setext heading
 Code block below:
 
     this is code!
-| <- meta.paragraph
-| ^^^^^^^^^^^^^^^^ meta.paragraph
-| MO: Removed indented raw code blocks
+| ^^^^^^^^^^^^^^^^ markup.raw.block
 
     more code
     spanning multiple lines
-| <- meta.paragraph
-| ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph
-| MO: Removed indented raw code blocks
+| ^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block
 
 paragraph
 | <- meta.paragraph
-| ^^^^^^^^^^^^^^^^^^ meta.paragraph
 
 
 # TEST: FENCED CODE BLOCKS ####################################################
@@ -1493,17 +1508,13 @@ aaa
 |  ^^^ meta.code-fence.definition.end.text.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
 |     ^ meta.code-fence.definition.end.text.markdown-gfm - punctuation
 
-    ```
-    aaa
-     aaa
-    aaa
-    ```
-| <- meta.code-fence.definition.end.text.markdown-gfm - punctuation
-|^^^ meta.code-fence.definition.end.text.markdown-gfm - punctuation
-|   ^^^ meta.code-fence.definition.end.text.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
-|      ^ meta.code-fence.definition.end.text.markdown-gfm - punctuation
-| MO: Removed indented raw code blocks
+## https://spec.commonmark.org/0.30/#example-134
 
+    ```
+    aaa
+    ```
+| <- markup.raw.block.markdown
+|^^^^^^^ markup.raw.block.markdown - punctuation
 
 ## https://spec.commonmark.org/0.30/#example-135
 
@@ -1826,13 +1837,12 @@ graph n {}
 <div></div>
 |^^^ entity.name.tag.block.any.html
 <?php
-| <- markup.raw.code-fence.html-php.markdown-gfm embedding.php text.html.php meta.embedded.php punctuation.section.embedded.begin.php
+| <- markup.raw.code-fence.html-php.markdown-gfm embedding.php text.html.basic meta.embedded.block.php punctuation.section.embedded.begin.php
 var_dump(expression);
-| <- markup.raw.code-fence.html-php.markdown-gfm embedding.php text.html.php meta.embedded.php source.php meta.function-call
+| <- markup.raw.code-fence.html-php.markdown-gfm embedding.php text.html.basic meta.embedded.block.php source.php meta.function-call
 ```
 | <- meta.code-fence.definition.end.html-php.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
 |^^ meta.code-fence.definition.end.html-php.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
-| MO: Changed from `text.html.basic` to `text.html.php`. Presumably something's changed in the PHP parser since this was first written
 
 ```js
 | <- punctuation.definition.raw.code-fence.begin
@@ -1882,7 +1892,7 @@ for (var i = 0; i < 10; i++) {
 
 ```php
 var_dump(expression);
-| <- markup.raw.code-fence.php.markdown-gfm source.php meta.function-call.identifier.php
+| <- markup.raw.code-fence.php.markdown-gfm source.php meta.function-call.php
 ```
 | <- meta.code-fence.definition.end.php.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
 |^^ meta.code-fence.definition.end.php.markdown-gfm punctuation.definition.raw.code-fence.end.markdown
@@ -2347,16 +2357,14 @@ okay
 | ^^^^^^^^^^^^ meta.disable-markdown comment.block.html
 
     <!-- foo -->
-|   ^^^^^^^^^^^^ meta.disable-markdown comment.block.html
-| MO: Removed indented raw code blocks
+|^^^^^^^^^^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-184
 
   <div>
 
     <div>
-|^^^^^^^^^ meta.disable-markdown - markup.raw.block.markdown
-| MO: Removed indented raw code blocks
+|^^^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-188
 
@@ -2418,9 +2426,8 @@ Hi
     <td>
       Hi
     </td>
-| <- meta.disable-markdown - markup.raw.block.markdown
-|^^^^^^^ meta.disable-markdown - markup.raw.block.markdown
-| MO: Removed indented raw code blocks
+| <- markup.raw.block.markdown
+|^^^^^^^^^ markup.raw.block.markdown
 
   </tr>
 | <- meta.disable-markdown
@@ -2700,14 +2707,10 @@ This is a link reference definition, but it has no title:
 
 ## https://spec.commonmark.org/0.30/#example-211
 
-MO: This is now a link reference definition, even though it is indented four spaces:
+This is not a link reference definition, because it is indented four spaces:
 
     [foo]: /url "title"
-|^^^^^^^^^^^^^^^^^^^^^^ meta.link.reference.def.markdown - markup.raw.block.markdown
-|        ^ punctuation.separator.key-value - markup.raw.block.markdown
-|          ^^^^ markup.underline.link - markup.raw.block.markdown
-|               ^^^^^^^ string.quoted.double - markup.raw.block.markdown
-| MO: Removed indented raw code blocks
+|^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block.markdown - meta.link
 
 ## https://spec.commonmark.org/0.30/#example-212
 
@@ -2860,13 +2863,8 @@ text
 |     ^ punctuation.definition.reference.end.markdown
 |      ^ punctuation.separator.key-value.markdown
 
-     [^1]: And that's the footnote.
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.link.reference.def.footnote.markdown-extra - markup.raw.block.markdown
-|    ^ punctuation.definition.reference.begin.markdown - markup.raw.block.markdown
-|     ^^ entity.name.reference.link.markdown - markup.raw.block.markdown
-|       ^ punctuation.definition.reference.end.markdown - markup.raw.block.markdown
-|        ^ punctuation.separator.key-value.markdown - markup.raw.block.markdown
-| MO: Removed indented raw code blocks
+     [^1]: And that's no footnote.
+|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block.markdown
 
 [^1]:
     And that's the footnote
@@ -2923,13 +2921,8 @@ with a *second* line.
 |       ^ punctuation.separator.key-value.markdown
 
 >     [^1]: And that's no footnote.
-|^ markup.quote.markdown - meta.link
-| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown meta.link.reference.def.footnote.markdown-extra - markup.raw
-|     ^ punctuation.definition.reference.begin.markdown - markup.raw
-|      ^^ entity.name.reference.link.markdown - markup.raw
-|        ^ punctuation.definition.reference.end.markdown - markup.raw
-|         ^ punctuation.separator.key-value.markdown - markup.raw
-| MO: Removed indented raw code blocks
+|^ markup.quote.markdown - meta.link - markup.raw
+| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 > [^1]: And that's the footnote.
 > with a *second* line.
@@ -2952,17 +2945,16 @@ with a *second* line.
 
 >   [^1]: And that's the footnote.
 > 
->     not a code block
-| <- markup.quote.markdown punctuation.definition.blockquote.markdown - markup.link - markup.raw
-| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.paragraph.markdown - markup.link - markup.raw
-| MO: Removed indented raw code blocks
+>     code block
+| <- markup.quote.markdown punctuation.definition.blockquote.markdown - markup.raw
+|^ markup.quote.markdown - markup.raw
+| ^^^^^^^^^^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 > [^1]:
 >     And that's the footnote.
 > 
-      That's a *second* paragraph.
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown - markup.raw
-| MO: Removed indented raw code blocks
+      That's not a *second* paragraph.
+|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block.markdown
 
 # TEST: TABLES ################################################################
 
@@ -3096,9 +3088,8 @@ https://foo.bar/baz
 
 | table | followed by
     quote
-| <- meta.paragraph.markdown - markup.raw
-|^^^^^^^^^ meta.paragraph.markdown - markup.raw
-| MO: Removed indented raw code blocks
+| <- markup.raw.block.markdown
+|^^^^^^^^^ markup.raw.block.markdown
 
 | table | followed by
 ```fenced
@@ -3191,10 +3182,8 @@ bar
     > # Foo
     > bar
     > baz
-|^^^ markup.quote.markdown - punctuation - markup.raw
-|   ^ markup.quote.markdown punctuation.definition.blockquote.markdown - markup.raw
-|     ^^^^^ markup.quote.markdown - punctuation - markup.raw
-| MO: Removed indented raw code blocks
+| <- markup.raw.block.markdown
+|^^^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-232
 
@@ -3242,11 +3231,8 @@ ___
 
 >     foo
     bar
-| <- markup.paragraph.markdown - markup.raw
-|^^^ markup.paragraph.markdown - markup.raw
-| MO: Removed indented raw code blocks
-| MO: Why is it markup.paragraph.markdown and not meta.paragraph.markdown?
-
+| <- markup.raw.block.markdown
+|^^^^^^^ markup.raw.block.markdown
 
 ## https://spec.commonmark.org/0.30/#example-237
 
@@ -3259,10 +3245,8 @@ foo
 
 > foo
     - bar
-|   ^ markup.list.unnumbered.bullet.markdown punctuation.definition.list_item.markdown - markup.quote
-|^^^ markup.list.unnumbered.markdown - markup.quote - markup.raw
-|    ^^^^ markup.list.unnumbered.markdown - markup.quote - markup.raw
-| MO: Lists are now allowed to be indented
+| <- markup.quote.markdown - markup.list - markup.raw
+|^^^^^^^^^ markup.quote.markdown - markup.list - markup.raw
 
 ## https://spec.commonmark.org/0.30/#example-239
 
@@ -3378,8 +3362,7 @@ bar
 >     code
 | <- markup.quote.markdown punctuation.definition.blockquote.markdown
 |^ markup.quote.markdown - markup.raw
-| ^^^^^^^^^ markup.quote.markdown - markup.raw
-| MO: Removed indented raw code blocks
+| ^^^^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 >    not code
 | <- markup.quote.markdown punctuation.definition.blockquote.markdown - markup.raw
@@ -3396,14 +3379,10 @@ bar
   >=
 | ^ punctuation.definition.blockquote.markdown
     >=
-|   ^ punctuation.definition.blockquote.markdown - markup.raw
-| ^^^^^ markup.quote.markdown - markup.raw
-| MO: Removed indented raw code blocks
- 
+| ^^^^^ markup.quote.markdown - punctuation
+
     >=
-|   ^ punctuation.definition.blockquote.markdown - markup.raw
-| ^^^^^ markup.quote.markdown - markup.raw
-| MO: Removed indented raw code blocks
+|   ^^ markup.raw.block.markdown - markup.quote - punctuation
 
 ## https://custom-tests/block-quotes/block-quote-nesting
 
@@ -3425,15 +3404,12 @@ bar
 >    > this is a nested quote but no code in a block quote
 >     > with a second line of content
 | <- punctuation.definition.blockquote
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.paragraph.markdown - markup.raw
-|     ^ punctuation.definition.blockquote - markup.raw
-| MO: Removed indented raw code blocks
-> 
->     > this is NOT code in a block quote, it's a nested quote
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown - markup.raw
-|       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.paragraph.markdown 
-|     ^ punctuation.definition.blockquote - markup.raw
-| MO: Removed indented raw code blocks
+|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.paragraph.markdown
+|     ^ - punctuation
+
+>     > this is code in a block quote, not a nested quote
+| <- punctuation.definition.blockquote
+|     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block - markup.quote markup.quote
 
 ## https://custom-tests/block-quotes/block-quote-terminations
 
@@ -3818,9 +3794,8 @@ second line
         |^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.list.unnumbered.markdown markup.heading.2.markdown
 
 >       ## not a list item heading
-        | <- markup.quote.markdown - markup.raw
-        |^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown - markup.raw
-        | MO: Removed indented raw code blocks
+        | <- markup.quote.markdown markup.raw.block.markdown
+        |^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 > * 
 > 
@@ -3855,9 +3830,8 @@ second line
         |^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.list.unnumbered.markdown markup.heading.2.markdown
 
 >       ## not a list item heading
-        | <- markup.quote.markdown - markup.raw
-        |^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown - markup.raw
-        | MO: Removed indented raw code blocks
+        | <- markup.quote.markdown markup.raw.block.markdown
+        |^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.raw.block.markdown
 
 ## https://custom-tests/block-quotes/list-blocks/ordered-items-with-atx-headings
 
@@ -4470,17 +4444,13 @@ foo
 
     1.  A paragraph
         with two lines.
-        |^^^^^^^^^^^^^^^ markup.list.numbered.markdown meta.paragraph.list.markdown - markup.raw
-        | MO: Removed indented raw code blocks
+        |^^^^^^^^^^^^^^^ markup.raw.block.markdown - markup.list
 
             indented code
-        |^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown meta.paragraph.list.markdown - markup.raw
-        | MO: Removed indented raw code blocks
+        |^^^^^^^^^^^^^^^^^ markup.raw.block.markdown - markup.list
 
         > A block quote.
-        |^^^^^^^^^^^^^^^^ markup.list.numbered.markdown markup.quote.markdown - markup.raw
-        | ^^^^^^^^^^^^^^^ markup.paragraph.markdown
-        | MO: Removed indented raw code blocks
+        |^^^^^^^^^^^^^^^^ markup.raw.block.markdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-290
 
@@ -4689,14 +4659,7 @@ There can be any number of blank lines between items:
 
 
       bim
-|^^^^^^^^ markup.list.unnumbered.markdown - markup.raw
-| MO: I'm not a fan of this, unless you can make it aware of the indentation levels. 
-| I can see how, if 'bim' had started with '- ',
-| it should be considered a continuation of the previous list; but, without
-| the '- ', I think it should be a new paragraph. 
-| How else are you supposed
-| to "break out" of a list?
-
+      |^^^ markup.list.unnumbered.markdown - markup.raw
 
 ## https://spec.commonmark.org/0.30/#example-308
 
@@ -4729,8 +4692,7 @@ you can insert a blank HTML comment:
 <!-- -->
 
     code
-    |^^^^ meta.paragraph.markdown - raw.block - markup.list
-    | MO: Removed indented raw code blocks
+    |^^^^ markup.raw.block.markdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-311
 
@@ -5563,8 +5525,7 @@ paragraph
 
        >       foo 1
        >       foo 2
-       | ^^^^^^^^^^^^ markup.list.numbered.markdown markup.quote.markdown markup.paragraph.markdown
-       | MO: Removed indented raw code blocks
+       | ^^^^^^^^^^^^ markup.list.numbered.markdown markup.quote.markdown markup.raw.block.markdown
 
 ## https://custom-tests/list-blocks/items-with-nested-block-quotes
 
@@ -5586,17 +5547,15 @@ paragraph
        | <- punctuation.definition.blockquote
        |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown
        
-       >    > this is a nested quote and no longer a code block
+       >    > this is a nested quote but no code in a block quote
        >     > with a second line of content
        | <- punctuation.definition.blockquote
        |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown markup.paragraph.markdown
-       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - markup.raw
-       | MO: Removed indented raw code blocks
+       |     ^ - punctuation
        
-       >     > this is no longer code in a block quote, so it's still a nested quote
+       >     > this is code in a block quote, not a nested quote
        | <- punctuation.definition.blockquote
-       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown - markup.raw
-       | MO: Removed indented raw code blocks
+       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.raw.block - markup.quote markup.quote
 
 ## https://custom-tests/list-blocks/items-with-block-quotes/list-blocks
 
