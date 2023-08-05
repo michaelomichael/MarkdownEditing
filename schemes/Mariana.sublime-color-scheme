@@ -34,7 +34,7 @@
 	},
 	"rules": [
 		{
-			"scope": "markup.heading.0.markdown punctuation.definition.heading.begin.markdown, markup.heading.0.markdown punctuation.definition.heading.end.markdown",
+			"scope": "markup.heading.0.markdown punctuation.definition.heading.begin.markdown, markup.heading.0.markdown punctuation.definition.heading.mid.start.markdown, markup.heading.0.markdown punctuation.definition.heading.mid.end.markdown, markup.heading.0.markdown punctuation.definition.heading.end.markdown",
 			"foreground": "var(pink)",
 			"font_style": ""
 		},

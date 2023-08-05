@@ -7,8 +7,8 @@
   - foo
 
 	bar
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-6
 
@@ -4265,8 +4265,8 @@ with two lines.
         indented code
 
     > A block quote.
-| <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
-|^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+| <- markup.quote.markdown.morkdown - markup.list
+|^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown - markup.list
 |   ^ punctuation.definition.blockquote.markdown.morkdown
 
 ## https://spec.commonmark.org/0.30/#example-255
@@ -4274,8 +4274,8 @@ with two lines.
 - one
 
  two
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 > Note: `two` is not a part of the list item, but ST can't handle it!
 
@@ -4284,16 +4284,16 @@ with two lines.
 - one
 
   two
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-257
 
  -    one
 
      two
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 > Note: `two` is not a part of the list item, but ST can't handle it!
 
@@ -4302,8 +4302,8 @@ with two lines.
  -    one
 
       two
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^^^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-261
 
@@ -4326,26 +4326,26 @@ A list item may contain blocks that are separated by more than one blank line.
 
 
   bar
-  | <- markup.list.unnumbered.markdown.morkdown
-  |^^^ markup.list.unnumbered.markdown.morkdown
+  | <- meta.paragraph.markdown.morkdown - markup.list
+  |^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-263
 
 1.  foo
 
     ```
-    | <- markup.list.numbered.markdown.morkdown meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown
+    | <- meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown - markup.list
     bar
-    | <- markup.list.numbered.markdown.morkdown markup.raw.code-fence.markdown-gfm.morkdown - punctuation
+    | <- markup.raw.code-fence.markdown-gfm.morkdown - punctuation - markup.list
     ```
-    | <- markup.list.numbered.markdown.morkdown meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+    | <- meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown - markup.list
 
     baz
-    | <- markup.list.numbered.markdown.morkdown
+    | <- meta.paragraph.markdown.morkdown - markup.list
 
     > bam
-    | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-    |^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+    | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
+    |^^^^^ markup.quote.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-265
 
@@ -4436,11 +4436,13 @@ foo
      with two lines.
      |^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown
 
-         indented code (but ST can't reliably highlight it!)
-     |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - markup.raw
+         no longer indented code (but ST can't reliably highlight it!)
+     |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list - markup.raw
      
      > A block quote.
-     |^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+     |<- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
+     |^  markup.quote.markdown.morkdown - markup.list
+     | ^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-287
 
@@ -4448,11 +4450,11 @@ foo
       with two lines.
       |^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown
 
-          indented code (but ST can't reliably highlight it!)
-      |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - markup.raw
+          no longer indented code (but ST can't reliably highlight it!)
+      |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
       > A block quote.
-      | ^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+      | ^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-288
 
@@ -4460,11 +4462,12 @@ foo
        with two lines.
        |^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown
 
-            indented code (but ST can't reliably highlight it!)
-       |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - markup.raw
+            no longer indented code (but ST can't reliably highlight it!)
+       |^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
        > A block quote.
-       |^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+       |^                markup.quote.markdown.morkdown - markup.list
+       | ^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-289
 
@@ -4473,13 +4476,13 @@ foo
         |^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - markup.raw
         | MO: Removed indented raw code blocks
 
-            indented code
-        |^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - markup.raw
+            no longer indented code
+        |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
         | MO: Removed indented raw code blocks
 
         > A block quote.
-        |^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown - markup.raw
-        | ^^^^^^^^^^^^^^^ markup.paragraph.markdown.morkdown
+        |^                markup.quote.markdown.morkdown - markup.raw - markup.list
+        | ^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.raw - markup.list
         | MO: Removed indented raw code blocks
 
 ## https://spec.commonmark.org/0.30/#example-290
@@ -4489,11 +4492,11 @@ with two lines.
 | <- markup.list.numbered.markdown.morkdown
 |^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown
 
-          indented code (but ST can't reliably highlight it!)
-      |^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - markup.raw
+          no longer indented code (but ST can't reliably highlight it!)
+      |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
       > A block quote.
-      | ^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+      | ^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-291
 
@@ -4552,10 +4555,10 @@ Here we need four, because the list marker is wider:
 
 10) foo
     - bar
-| <- markup.list.numbered.markdown.morkdown
-|^^^ markup.list.numbered.markdown.morkdown
+| <- markup.list.unnumbered.markdown.morkdown
+|^^^ markup.list.unnumbered.markdown.morkdown
 |   ^ markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
-|    ^^^^^ markup.list.numbered.markdown.morkdown
+|    ^^^^^ markup.list.unnumbered.markdown.morkdown
 
 ## https://spec.commonmark.org/0.30/#example-297
 
@@ -4563,10 +4566,10 @@ Three is not enough:
 
 10) foo
    - bar
-| <- markup.list.numbered.markdown.morkdown
-|^^ markup.list.numbered.markdown.morkdown
+| <- markup.list.unnumbered.markdown.morkdown
+|^^ markup.list.unnumbered.markdown.morkdown
 |  ^ markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
-|   ^^^^^ markup.list.numbered.markdown.morkdown
+|   ^^^^^ markup.list.unnumbered.markdown.morkdown
 
 ## https://spec.commonmark.org/0.30/#example-298
 
@@ -4605,13 +4608,13 @@ A list item can contain a heading:
 
 - Should be a setext heading!
   ---
-| ^^^ markup.list.unnumbered.markdown.morkdown meta.separator.thematic-break.markdown.morkdown punctuation.definition.thematic-break.markdown.morkdown
+| ^^^ meta.separator.thematic-break.markdown.morkdown punctuation.definition.thematic-break.markdown.morkdown - markup.list
 
 - Bar
   ---
   baz
-| <- markup.list.unnumbered.markdown.morkdown
-|^^^^^ markup.list.unnumbered.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.list
+|^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-301
 
@@ -4689,14 +4692,7 @@ There can be any number of blank lines between items:
 
 
       bim
-|^^^^^^^^ markup.list.unnumbered.markdown.morkdown - markup.raw
-| MO: I'm not a fan of this, unless you can make it aware of the indentation levels. 
-| I can see how, if 'bim' had started with '- ',
-| it should be considered a continuation of the previous list; but, without
-| the '- ', I think it should be a new paragraph. 
-| How else are you supposed
-| to "break out" of a list?
-
+|^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-308
 
@@ -4722,7 +4718,7 @@ you can insert a blank HTML comment:
 -   foo
 
     notcode
-    |^^^^^^^ markup.list.unnumbered.markdown.morkdown - markup.raw
+    |^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
 -   foo
 
@@ -4809,12 +4805,12 @@ So is this, with a empty second item:
   | ^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.description.markdown.morkdown
 
   [ref]: /url
-  | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-  |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
-  |^^^ entity.name.reference.link.markdown.morkdown
-  |   ^ punctuation.definition.reference.end.markdown.morkdown
-  |    ^ punctuation.separator.key-value.markdown.morkdown
-  |      ^^^^ markup.underline.link.markdown.morkdown
+  | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
+  |^^^ entity.name.reference.link.markdown.morkdown - markup.list
+  |   ^ punctuation.definition.reference.end.markdown.morkdown - markup.list
+  |    ^ punctuation.separator.key-value.markdown.morkdown - markup.list
+  |      ^^^^ markup.underline.link.markdown.morkdown - markup.list
 - d
   | <- markup.list.unnumbered.markdown.morkdown
 
@@ -4847,7 +4843,7 @@ So is this, with a empty second item:
   - b
 
     c
-    | <- markup.list.unnumbered.markdown.morkdown
+    | <- meta.paragraph.markdown.morkdown - markup.list
 - d
   | <- markup.list.unnumbered.markdown.morkdown
 
@@ -4856,8 +4852,8 @@ So is this, with a empty second item:
 * a
   > b
   >
-  | <- markup.list.unnumbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-  |^ markup.list.unnumbered.markdown.morkdown markup.quote.markdown.morkdown - punctuation
+  | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
+  |^ markup.quote.markdown.morkdown - punctuation - markup.list
 
 * a
   > b
@@ -4870,12 +4866,12 @@ So is this, with a empty second item:
 - a
   > b
   ```
-  | <- markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown
-  |^^ markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown
+  | <- meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown - markup.list
+  |^^  meta.code-fence.definition.begin.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown - markup.list
   c
   ```
-  | <- markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
-  |^^ markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+  | <- meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown - markup.list
+  |^^  meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown - markup.list
 
 - a
   > b
@@ -4897,7 +4893,7 @@ So is this, with a empty second item:
    |^^ markup.list.numbered.markdown.morkdown meta.code-fence.definition.end.text.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
 
    bar
-   | <- markup.list.numbered.markdown.morkdown
+   | <- meta.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-325
 
@@ -4905,8 +4901,8 @@ So is this, with a empty second item:
   * bar
 
   baz
-  | <- markup.list.unnumbered.markdown.morkdown
-  |^^^ markup.list.unnumbered.markdown.morkdown
+  | <- meta.paragraph.markdown.morkdown - markup.list
+  |^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://custom-tests/list-blocks/gfm-tasks
 
@@ -4968,7 +4964,9 @@ So is this, with a empty second item:
 
 - * * * * * * *
   still a list item
-| ^^^^^^^^^^^^^^^^^^ markup.list.unnumbered
+| ^^^^^^^^^^^^^^^^^^ - markup.list.unnumbered
+| MO: Not sure why this line isn't considered a 'markup.list.unnumbered'. Something to do with the thematic break. 
+|     One to look at in the future.
 
 - - * * * * * *
 | <- markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
@@ -4990,7 +4988,10 @@ So is this, with a empty second item:
 
 - - * * * * * *
     still a list item
-|   ^^^^^^^^^^^^^^^^^^ markup.list.unnumbered
+|   ^^^^^^^^^^^^^^^^^^ - markup.list.unnumbered
+| MO: Not sure why this line isn't considered a 'markup.list.unnumbered'. Something to do with the thematic break. 
+|     One to look at in the future.
+
 
 1. * * * * * * *
 | <- markup.list.numbered.bullet.markdown.morkdown
@@ -5012,7 +5013,10 @@ So is this, with a empty second item:
 
 1. * * * * * * *
    still a list item
-|  ^^^^^^^^^^^^^^^^^^ markup.list.numbered
+|  ^^^^^^^^^^^^^^^^^^ - markup.list.numbered
+| MO: Not sure why this line isn't considered a 'markup.list.unnumbered'. Something to do with the thematic break. 
+|     One to look at in the future.
+
 
 ## https://custom-tests/list-blocks/items-with-atx-headings
 
@@ -5023,64 +5027,64 @@ So is this, with a empty second item:
 
 * list item
  # global heading (matched as list item heading)
- | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
- |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown
+ | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+ |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
 * list item
   # list item heading
-  | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-  |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown
+  | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 * list item
   ## list item heading
-  | <- markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-  |^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown
+  | <- markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^^^^^^^^^^ markup.heading.2.markdown.morkdown - markup.list
   + list item
     ### list item heading
-    | <- markup.list.unnumbered.markdown.morkdown markup.heading.3.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-    |^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.3.markdown.morkdown
+    | <- markup.heading.3.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^^^^^^^^^^^ markup.heading.3.markdown.morkdown - markup.list
     + list item
       #### list item heading
-      | <- markup.list.unnumbered.markdown.morkdown markup.heading.4.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.4.markdown.morkdown
+      | <- markup.heading.4.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^^^^ markup.heading.4.markdown.morkdown - markup.list
 
 * 
   # list item heading
-  | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-  |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+  | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
   + 
     # list item heading
-    | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-    |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+    | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
     - 
       # list item heading 1
-      | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
       ## list item heading 2
-      | <- markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown
+      | <- markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^^^^ markup.heading.2.markdown.morkdown - markup.list
 
 * 
 
   # list item heading
-  | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-  |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+  | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
   + 
 
     # list item heading
-    | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-    |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+    | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
     - 
 
       # list item heading 1
-      | <- markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.1.markdown.morkdown  
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
       ## list item heading 2
-      | <- markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown markup.heading.2.markdown.morkdown
+      | <- markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^^^^ markup.heading.2.markdown.morkdown - markup.list
 
 1. list item
 # global heading
@@ -5088,124 +5092,122 @@ So is this, with a empty second item:
 |^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
 2. list item
- # global heading (matched as list item heading)
- | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
- |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+ # global heading (no longer matched as list item heading)
+ | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+ |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
 3. list item
    # list item heading
-   | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-   |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+   | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+   |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
    1. list item
       # list item heading
-      | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
       1. list item
          # list item heading
-         | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+         | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
    2. list item
       # list item heading
-      | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
       1. list item
          # list item heading
-         | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+         | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
 1. 
    # list item heading
-   | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-   |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+   | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+   |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
    1. 
       # list item heading
-      | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
       1. 
          # list item heading
-         | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+         | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
          ## list item heading 2
-         | <- markup.list.numbered.markdown.morkdown markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.2.markdown.morkdown
+         | <- markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^^^^ markup.heading.2.markdown.morkdown - markup.list
 
 1. 
 
    # list item heading
-   | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-   |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+   | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+   |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
    1. 
 
       # list item heading
-      | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-      |^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+      | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
       1. 
 
          # list item heading 1
-         | <- markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+         | <- markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
          ## list item heading 2
-         | <- markup.list.numbered.markdown.morkdown markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
-         |^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.2.markdown.morkdown
+         | <- markup.heading.2.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^^^^^^^^^^^^ markup.heading.2.markdown.morkdown - markup.list
 
 ## https://custom-tests/list-blocks/items-with-fenced-code-blocks-indented-by-tabs
 
   * foo
 	```xml
-|^^^ markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.begin.xml.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown
-|    ^^ markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.begin.xml.markdown-gfm.morkdown constant.other.language-name.markdown.morkdown
+|^^^ meta.code-fence.definition.begin.xml.markdown-gfm.morkdown punctuation.definition.raw.code-fence.begin.markdown.morkdown - markup.list
+|    ^^ meta.code-fence.definition.begin.xml.markdown-gfm.morkdown constant.other.language-name.markdown.morkdown - markup.list
 	<tag>
-|^^^^^ markup.list.unnumbered.markdown.morkdown markup.raw.code-fence.xml.markdown-gfm.morkdown text.xml meta.tag.xml
+|^^^^^ markup.raw.code-fence.xml.markdown-gfm.morkdown text.xml meta.tag.xml - markup.list
 	```
-|^^^ markup.list.unnumbered.markdown.morkdown meta.code-fence.definition.end.xml.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+|^^^ meta.code-fence.definition.end.xml.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown - markup.list
 
 ## https://custom-tests/list-blocks/items-with-html-blocks
 
 * list item
   
   <p>*no-markdown*</p>
-  |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown - meta.paragraph
+  |^^^^^^^^^^^^^^^^^^^ meta.disable-markdown - meta.paragraph - markup.list
   |               ^^^^ meta.tag
 
   + sub item
 
     <p>*no-markdown*</p>
-    |^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown - meta.paragraph
+    |^^^^^^^^^^^^^^^^^^^ meta.disable-markdown - meta.paragraph - markup.list
     |               ^^^^ meta.tag
 
     <style>
         h1 {
             font-family: Helvetica;
-        |^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown source.css.embedded.html meta.property-list.css
+        |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.disable-markdown source.css.embedded.html meta.property-list.css - markup.list
         }
 
         p {
             font-family: "Ubuntu Sans";
-        |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown source.css.embedded.html meta.property-list.css
+        |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.disable-markdown source.css.embedded.html meta.property-list.css - markup.list
         }
     </style>
-    | <- markup.list.unnumbered.markdown.morkdown meta.disable-markdown meta.tag.style.end.html punctuation.definition.tag.begin.html
-    |^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown meta.tag.style.end.html
-    |       ^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown - mata.tag
+    | <- meta.disable-markdown meta.tag.style.end.html punctuation.definition.tag.begin.html - markup.list
+    |^^^^^^^ meta.disable-markdown meta.tag.style.end.html - markup.list
+    |       ^ meta.disable-markdown - mata.tag - markup.list
 
     Further sub item text.
-    | <- markup.list.unnumbered.markdown.morkdown
-    |^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown
-
+    | <-     |^^^^^^^^^^^^^^^^^^^^^  - markup.list
   + sub item
     <p>
-    | <- markup.list.unnumbered.markdown.morkdown meta.disable-markdown meta.tag
-    |^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown meta.tag
+    | <- meta.disable-markdown meta.tag - markup.list
+    |^^ meta.disable-markdown meta.tag - markup.list
       *no-markodwn*
-    |^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown - markup.italic
+    |^^^^^^^^^^^^^^^ meta.disable-markdown - markup.italic - markup.list
     </p>
     - not a list item
-    | <- markup.list.unnumbered.markdown.morkdown meta.disable-markdown - punctuation
-    |^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.disable-markdown - punctuation
+    | <- meta.disable-markdown - punctuation - markup.list
+    |^^^^^^^^^^^^^^^^^ meta.disable-markdown - punctuation - markup.list
 
 ## https://custom-tests/list-blocks/items-with-reference-definitions
 
@@ -5216,8 +5218,8 @@ So is this, with a empty second item:
     |        ^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.description.markdown.morkdown
   
     [ref]: /url
-    | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-    |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+    | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
     |^^^ entity.name.reference.link.markdown.morkdown
     |   ^ punctuation.definition.reference.end.markdown.morkdown
     |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5227,8 +5229,8 @@ So is this, with a empty second item:
       |        ^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.description.markdown.morkdown
     
       [ref]: /url
-      | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-      |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+      | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
       |^^^ entity.name.reference.link.markdown.morkdown
       |   ^ punctuation.definition.reference.end.markdown.morkdown
       |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5236,22 +5238,22 @@ So is this, with a empty second item:
  
       [ref]:
       /url
-      | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown
-      |^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown
+      | <- meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown - markup.list
+      |^^^ meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown - markup.list
 
       [ref]: /url
       "title"
-      | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown
-      |^^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown
+      | <- meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown - markup.list
+      |^^^^^^ meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown - markup.list
 
       [ref]: /url
       no title
-      | <- markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - meta.link
-      |^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - meta.link
+      | <- meta.paragraph.markdown.morkdown - meta.link - markup.list - meta.paragraph.list
+      |^^^^^^^^ meta.paragraph.markdown.morkdown - meta.link - markup.list - meta.paragraph.list
 
   [ref]: /url
-  | <- markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-  |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+  | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+  |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
   |^^^ entity.name.reference.link.markdown.morkdown
   |   ^ punctuation.definition.reference.end.markdown.morkdown
   |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5264,8 +5266,8 @@ So is this, with a empty second item:
       |        ^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.description.markdown.morkdown
     
       [ref]: /url
-      | <- markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-      |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+      | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+      |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
       |^^^ entity.name.reference.link.markdown.morkdown
       |   ^ punctuation.definition.reference.end.markdown.morkdown
       |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5275,8 +5277,8 @@ So is this, with a empty second item:
          |        ^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.description.markdown.morkdown
        
          [ref]: /url
-         | <- markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-         |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+         | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+         |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
          |^^^ entity.name.reference.link.markdown.morkdown
          |   ^ punctuation.definition.reference.end.markdown.morkdown
          |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5284,22 +5286,22 @@ So is this, with a empty second item:
 
          [ref]:
          /url
-         | <- markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown
-         |^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown
+         | <- meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown - markup.list
+         |^^^ meta.link.reference.def.markdown.morkdown markup.underline.link.markdown.morkdown - markup.list
 
          [ref]: /url
          "title"
-         | <- markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown
-         |^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown
+         | <- meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown - markup.list
+         |^^^^^^ meta.link.reference.def.markdown.morkdown meta.string.title.markdown.morkdown string.quoted.double.markdown.morkdown - markup.list
 
          [ref]: /url
          no title
-         | <- markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - meta.link
-         |^^^^^^^^ markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - meta.link
+         | <- meta.paragraph.markdown.morkdown - meta.link - markup.list - meta.paragraph.list
+         |^^^^^^^^ meta.paragraph.markdown.morkdown - meta.link - markup.list - meta.paragraph.list
 
    [ref]: /url
-   | <- markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown
-   |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.markdown.morkdown
+   | <- meta.link.reference.def.markdown.morkdown punctuation.definition.reference.begin.markdown.morkdown - markup.list
+   |^^^^^^^^^^^ meta.link.reference.def.markdown.morkdown - markup.list
    |^^^ entity.name.reference.link.markdown.morkdown
    |   ^ punctuation.definition.reference.end.markdown.morkdown
    |    ^ punctuation.separator.key-value.markdown.morkdown
@@ -5314,8 +5316,8 @@ So is this, with a empty second item:
        [^1]:
            This is a foot note
            with a second line
-| <- markup.list.numbered.markdown.morkdown meta.link.reference.def.footnote.markdown-extra.morkdown
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.footnote.markdown-extra.morkdown
+| <- meta.link.reference.def.footnote.markdown-extra.morkdown - markup.list
+|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.link.reference.def.footnote.markdown-extra.morkdown - markup.list
 
 1. list item
    + sub item
@@ -5325,7 +5327,7 @@ So is this, with a empty second item:
            This is a foot note
            with a second line
        [^2]:
-       ^^^^^^ markup.list.numbered.markdown.morkdown meta.link.reference.def.footnote.markdown-extra.morkdown
+       ^^^^^^ meta.link.reference.def.footnote.markdown-extra.morkdown - markup.list
        ^ punctuation.definition.reference.begin.markdown.morkdown
         ^^ entity.name.reference.link.markdown.morkdown
           ^ punctuation.definition.reference.end.markdown.morkdown
@@ -5339,7 +5341,7 @@ So is this, with a empty second item:
            This is a foot note
            with a second line
        # header
-|^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown
+|^^^^^^^^^^^^^^^ markup.heading.1.markdown.morkdown - markup.list
 
 1. list item
    + sub item
@@ -5349,8 +5351,9 @@ So is this, with a empty second item:
            This is a foot note
            with a second line
      - sub item
-|^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown
 |    ^ markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
+|^^^^           markup.list.unnumbered.markdown.morkdown
+|     ^^^^^^^^^ markup.list.unnumbered.markdown.morkdown
 
 ## https://custom-tests/list-blocks/items-with-line-continuation
 
@@ -5391,13 +5394,13 @@ second line
 | <- markup.list.numbered.markdown.morkdown
    + subitem
 second line
-| <- markup.list.numbered.markdown.morkdown
+| <- markup.list.unnumbered.markdown.morkdown
      - subitem
 second line
-| <- markup.list.numbered.markdown.morkdown
+| <- markup.list.unnumbered.markdown.morkdown
        - subitem
 second line
-| <- markup.list.numbered.markdown.morkdown
+| <- markup.list.unnumbered.markdown.morkdown
 
 paragraph
 | <- meta.paragraph.markdown.morkdown
@@ -5407,45 +5410,45 @@ paragraph
 * list item
 
    > This is a blockquote.
-   | <- markup.list.unnumbered markup.quote punctuation.definition.blockquote
+   | <- markup.quote punctuation.definition.blockquote - markup.list
 
   + subitem
 
     > This is a blockquote.
-    | <- markup.list.unnumbered markup.quote punctuation.definition.blockquote
+    | <- markup.quote punctuation.definition.blockquote - markup.list
 
     - subitem
   
       > This is a blockquote.
-      | <- markup.list.unnumbered markup.quote punctuation.definition.blockquote
+      | <- markup.quote punctuation.definition.blockquote - markup.list
 
       - subitem
     
         > This is a blockquote.
-        | <- markup.list.unnumbered markup.quote punctuation.definition.blockquote
+        | <- markup.quote punctuation.definition.blockquote - markup.list
 
   This is a paragraph still part of the 
   list item
- |^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown - meta.paragraph meta.paragraph
+ |^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 1. list item
 
    > This is a blockquote.
-   | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+   | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
 
    2. subitem
 
       > This is a blockquote.
-      | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+      | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
     
       3. subitem
     
          > This is a blockquote.
-         | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+         | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
 
    This is a paragraph still part of the 
    list item
-   |^^^^^^^^^ markup.list.numbered.markdown.morkdown - meta.paragraph meta.paragraph
+   |^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
 
 ## https://custom-tests/list-blocks/items-with-block-quotes/block-quote-terminations
 
@@ -5460,23 +5463,23 @@ paragraph
 
        > Block quote followed by unordered list
        * list item
-       | <- markup.list.numbered.markdown.morkdown markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
-       |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - meta.quote
+       | <- markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
+       |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown - meta.quote
 
        > Block quote followed by unordered list
        + list item
-       | <- markup.list.numbered.markdown.morkdown markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
-       |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - meta.quote
+       | <- markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
+       |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown - meta.quote
 
        > Block quote followed by unordered list
        - list item
-       | <- markup.list.numbered.markdown.morkdown markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
-       |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown - meta.quote
+       | <- markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
+       |^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown - meta.quote
 
        > Block quote followed by ordered list
        1. list item
-       | <- markup.list.numbered.markdown.morkdown markup.list.numbered.bullet.markdown.morkdown
-       |^ markup.list.numbered.markdown.morkdown markup.list.numbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
+       | <- markup.list.numbered.bullet.markdown.morkdown
+       |^ markup.list.numbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
        | ^^^^^^^^^^ markup.list.numbered.markdown.morkdown - meta.quote
 
        > Block quote followed by ordered list
@@ -5487,8 +5490,8 @@ paragraph
 
        > Block quote followed by invalid list
        1234567890. no list item
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
-       |^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       | <- markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
+       |^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
        > Block quote followed by html block
        <p>*no-markdown</p>
@@ -5509,8 +5512,8 @@ paragraph
        
        > # Foo
        bar
-       | <- meta.paragraph.list.markdown.morkdown - markup.quote
-       |^^ meta.paragraph.list.markdown.morkdown - markup.quote
+       | <- meta.paragraph.markdown.morkdown - markup.quote - meta.paragraph.list
+       |^^ meta.paragraph.markdown.morkdown - markup.quote - meta.paragraph.list
        
        > # Foo
        > bar
@@ -5547,23 +5550,23 @@ paragraph
      - item
        >foo 1
        >foo 2
-       |^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       |^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
        
        > foo 1
        > foo 2
-       | ^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       | ^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
        
        >  foo 1
        >  foo 2
-       | ^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       | ^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
        
        >   foo 1
        >   foo 2
-       | ^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       | ^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
        >       foo 1
        >       foo 2
-       | ^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       | ^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
        | MO: Removed indented raw code blocks
 
 ## https://custom-tests/list-blocks/items-with-nested-block-quotes
@@ -5605,23 +5608,23 @@ paragraph
      - item
        > Block
        > 1. item
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-       |^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown
+       | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.list
+       |   ^^^^^^^^ markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown
        | ^^ markup.list.numbered.bullet.markdown.morkdown
 
        > Block
        > 1. item
        >    + item
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-       |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown
+       | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+       |^^^^^^^^^^^ markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown
        |    ^ markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
 
        > Block
        > 1. item
        >    + item
        >      - item
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-       |^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown
+       | <- markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+       |^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown
        |      ^ markup.list.unnumbered.bullet.markdown.morkdown punctuation.definition.list_item.markdown.morkdown
 
        > Block
@@ -5630,8 +5633,8 @@ paragraph
        >      - item
        >        > quote
        >        > quote
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-       |^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown
+       | <- markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+       |^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown
        |        ^ punctuation.definition.blockquote.markdown.morkdown
 
        > Block
@@ -5639,11 +5642,11 @@ paragraph
        >    + item
        >      - item
        >      # heading
-              | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+              | <- markup.quote.markdown.morkdown markup.list.numbered.markdown.morkdown markup.heading.1.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
        > # heading
-       | <- markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
-       |^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown - markup.heading
-       | ^^^^^^^^^^ markup.list.numbered.markdown.morkdown markup.quote.markdown.morkdown markup.heading.1.markdown.morkdown
+       | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
+       |^ markup.quote.markdown.morkdown - markup.heading
+       | ^^^^^^^^^^ markup.quote.markdown.morkdown markup.heading.1.markdown.morkdown
        | ^ punctuation.definition.heading.begin.markdown.morkdown
        |   ^^^^^^^ entity.name.section.markdown.morkdown
 
@@ -5690,19 +5693,19 @@ blah*
 - list item
 
   <span>*no-markdown*</span>
-  |^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown
+  |^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
   |                  ^^^^^^^ meta.tag
 
   - list item
   
     <span>*no-markdown*</span>
-    |^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown
+    |^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
     |                  ^^^^^^^ meta.tag
 
     - list item
       
       <span>*no-markdown*</span>
-      |^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown
+      |^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.list
       |                  ^^^^^^^ meta.tag
 
 ## https://custom-tests/list-blocks/items-with-links-and-references
@@ -5717,27 +5720,27 @@ blah*
     |                        ^ punctuation.definition.metadata.end.markdown.morkdown
 
     [see `demo`](#demo (demo))
-    | <- markup.list.numbered.markdown.morkdown meta.link.inline.description.markdown.morkdown punctuation.definition.link.begin.markdown.morkdown
-    |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.inline.description.markdown.morkdown
-    |           ^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.inline.metadata.markdown.morkdown
+    | <- meta.link.inline.description.markdown.morkdown punctuation.definition.link.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^ meta.link.inline.description.markdown.morkdown - markup.list
+    |           ^^^^^^^^^^^^^^ meta.link.inline.metadata.markdown.morkdown - markup.list
     |           ^ punctuation.definition.metadata.begin.markdown.morkdown
     |                  ^ punctuation.definition.string.begin.markdown.morkdown
     |                       ^ punctuation.definition.string.end.markdown.morkdown
     |                        ^ punctuation.definition.metadata.end.markdown.morkdown
 
     [see `demo`](#demo 'demo')
-    | <- markup.list.numbered.markdown.morkdown meta.link.inline.description.markdown.morkdown punctuation.definition.link.begin.markdown.morkdown
-    |^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.inline.description.markdown.morkdown
-    |           ^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.link.inline.metadata.markdown.morkdown
+    | <- meta.link.inline.description.markdown.morkdown punctuation.definition.link.begin.markdown.morkdown - markup.list
+    |^^^^^^^^^^^ meta.link.inline.description.markdown.morkdown - markup.list
+    |           ^^^^^^^^^^^^^^ meta.link.inline.metadata.markdown.morkdown - markup.list
     |           ^ punctuation.definition.metadata.begin.markdown.morkdown
     |                  ^ punctuation.definition.string.begin.markdown.morkdown
     |                       ^ punctuation.definition.string.end.markdown.morkdown
     |                        ^ punctuation.definition.metadata.end.markdown.morkdown
 
     Here is a ![example image](https://test.com/sublime.png "A demonstration").
-    |         ^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.description.markdown.morkdown
-    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.metadata.markdown.morkdown
-    |                                                                         ^^ markup.list.numbered.markdown.morkdown - meta.image
+    |         ^^^^^^^^^^^^^^^^ meta.image.inline.description.markdown.morkdown - markup.list
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.image.inline.metadata.markdown.morkdown - markup.list
+    |                                                                         ^^ - meta.image - markup.list
     |         ^^ punctuation.definition.image.begin.markdown.morkdown
     |                        ^ punctuation.definition.image.end.markdown.morkdown
     |                         ^ punctuation.definition.metadata.begin.markdown.morkdown
@@ -5748,9 +5751,9 @@ blah*
     |                                                                        ^ punctuation.definition.metadata.end.markdown.morkdown
 
     Here is a ![example image](https://test.com/sublime.png 'A demonstration').
-    |         ^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.description.markdown.morkdown
-    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.metadata.markdown.morkdown
-    |                                                                         ^^ markup.list.numbered.markdown.morkdown - meta.image
+    |         ^^^^^^^^^^^^^^^^ meta.image.inline.description.markdown.morkdown - markup.list
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.image.inline.metadata.markdown.morkdown - markup.list
+    |                                                                         ^^ - meta.image - markup.list
     |         ^^ punctuation.definition.image.begin.markdown.morkdown
     |                        ^ punctuation.definition.image.end.markdown.morkdown
     |                         ^ punctuation.definition.metadata.begin.markdown.morkdown
@@ -5761,9 +5764,9 @@ blah*
     |                                                                        ^ punctuation.definition.metadata.end.markdown.morkdown
 
     Here is a ![example image](https://test.com/sublime.png (A demonstration)).
-    |         ^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.description.markdown.morkdown
-    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.list.numbered.markdown.morkdown meta.image.inline.metadata.markdown.morkdown
-    |                                                                         ^^ markup.list.numbered.markdown.morkdown - meta.image
+    |         ^^^^^^^^^^^^^^^^ meta.image.inline.description.markdown.morkdown - markup.list
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.image.inline.metadata.markdown.morkdown - markup.list
+    |                                                                         ^^ - meta.image - markup.list
     |         ^^ punctuation.definition.image.begin.markdown.morkdown
     |                        ^ punctuation.definition.image.end.markdown.morkdown
     |                         ^ punctuation.definition.metadata.begin.markdown.morkdown
@@ -7908,3 +7911,346 @@ This is a [[wiki link]].
 |         ^^^^^^^^^^^^^ meta.link.reference.wiki.description.markdown.morkdown
 |         ^^ punctuation.definition.link.begin.markdown.morkdown
 |                    ^^ punctuation.definition.link.end.markdown.morkdown
+
+
+# MO: Custom Tests
+
+## MO: Indentation of paragraph (indented less than previous list item) should discontinue the list if blank line between
+
+   - foo
+     - bar
+       - baz
+       
+    bim
+|^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
+| This is technically correct according to CommonMark, but the sublime syntax doesn't seem to keep track of _how much_ 
+| a paragraph/list is indented, so it assumes that _any_ number of spaces before "bim" means that we want it to be a 
+| continuation of the nested list.
+| This causes problems now that we've gotten rid of "four spaces = raw code block", so it's more pragmatic to just
+| assume that a blank line will break us out of a list.
+
+   1. foo
+     2. bar
+       3. baz
+       
+    bim
+|^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
+| Same thing but with ordered instead of unordered lists.
+
+## MO: Indentation of paragraph (indented more than previous list item) should discontinue the list if blank line between
+
+   - foo
+     - bar
+       - baz
+       
+       bim
+|^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
+| In a perfect world, we could detect the number of spaces and infer that it _should_ be part of the preceding list
+| but, as stated in the example above, we can't do this. Safer, then, just to rule that the blank line ends the list.
+
+   1. foo
+     2. bar
+       3. baz
+       
+       bim
+|^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
+| Same thing but with ordered instead of unordered lists.
+
+## MO: Indentation of paragraph after a list should continue the list
+
+   - foo
+     - bar
+       - baz
+      bim
+|^^^^^^^^ markup.list.unnumbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - markup.raw
+| This is a nice-to-have.
+
+   1. foo
+     2. bar
+       3. baz
+      bim
+|^^^^^^^^ markup.list.numbered.markdown.morkdown meta.paragraph.list.markdown.morkdown - markup.raw
+| Same thing but with ordered instead of unordered lists.
+
+
+## MO: Day heading - top line
+
+═
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+
+╦
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+
+══╦══╦══
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+|^^^^^^^ markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+
+═    
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+|^^^^ markup.heading.0.markdown.morkdown 
+
+╦    
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+|^^^^ markup.heading.0.markdown.morkdown 
+
+══╦══╦══    
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+|^^^^^^^^^^^ markup.heading.0.markdown.morkdown 
+|^^^^^^^ punctuation.definition.heading.begin.markdown.morkdown
+
+      ═
+|     ^ markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+
+      ╦
+|     ^ markup.heading.0.markdown.morkdown punctuation.definition.heading.begin.markdown.morkdown
+
+      ══╦══╦══
+|^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+|     ^^^^^^^^ punctuation.definition.heading.begin.markdown.morkdown
+
+      ═    
+|     ^ punctuation.definition.heading.begin.markdown.morkdown
+|^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+      ╦    
+|     ^ punctuation.definition.heading.begin.markdown.morkdown
+|^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+      ══╦══╦══    
+|     ^^^^^^^^ punctuation.definition.heading.begin.markdown.morkdown
+|^^^^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+## MO: Day heading - middle line
+══╦══╦══
+║
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.mid.start.markdown.morkdown
+
+══╦══╦══
+      ║
+|     ^ punctuation.definition.heading.mid.start.markdown.morkdown
+|^^^^^^ markup.heading.0.markdown.morkdown
+
+══╦══╦══
+║      
+|<-     markup.heading.0.markdown.morkdown punctuation.definition.heading.mid.start.markdown.morkdown
+|^^^^^^ markup.heading.0.markdown.morkdown
+
+══╦══╦══
+      ║      
+|     ^       punctuation.definition.heading.mid.start.markdown.morkdown
+|^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+══╦══╦══
+║ x y z 1 2 3 ║
+|<-             markup.heading.0.markdown.morkdown punctuation.definition.heading.mid.start.markdown.morkdown
+|             ^ punctuation.definition.heading.mid.end.markdown.morkdown
+|^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+| ^^^^^^^^^^^   entity.name.section.markdown.morkdown
+
+══╦══╦══
+║ x y z 1 2 3 ║    
+|<-                 markup.heading.0.markdown.morkdown punctuation.definition.heading.mid.start.markdown.morkdown
+|             ^     punctuation.definition.heading.mid.end.markdown.morkdown
+|^^^^^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+| ^^^^^^^^^^^       entity.name.section.markdown.morkdown
+
+══╦══╦══
+    ║ x y z 1 2 3 ║
+|   ^               punctuation.definition.heading.mid.start.markdown.morkdown
+|                 ^ punctuation.definition.heading.mid.end.markdown.morkdown
+|^^^^^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+|     ^^^^^^^^^^^   entity.name.section.markdown.morkdown
+
+══╦══╦══
+    ║ x y z 1 2 3 ║    
+|   ^                   punctuation.definition.heading.mid.start.markdown.morkdown
+|                 ^     punctuation.definition.heading.mid.end.markdown.morkdown
+|^^^^^^^^^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+|     ^^^^^^^^^^^       entity.name.section.markdown.morkdown
+
+
+## MO: Day heading - bottom line
+══╦══╦══
+╚
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+
+══╦══╦══
+╝
+|<- meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+
+══╦══╦══
+╚══════╝
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+|^^^^^^^ markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+
+══╦══╦══
+╚    
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+|^^^^ markup.heading.0.markdown.morkdown 
+
+══╦══╦══
+╝    
+|<- meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+|^^^^ meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+
+══╦══╦══
+╚══════╝    
+|<- markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+|^^^^^^^^^^^ markup.heading.0.markdown.morkdown 
+|^^^^^^^ punctuation.definition.heading.end.markdown.morkdown
+══╦══╦══
+      ╚
+|     ^ markup.heading.0.markdown.morkdown punctuation.definition.heading.end.markdown.morkdown
+══╦══╦══
+      ╝
+|     ^ meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+
+══╦══╦══
+      ╚══════╝
+|^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+|     ^^^^^^^^ punctuation.definition.heading.end.markdown.morkdown
+
+══╦══╦══
+      ╚    
+|     ^ punctuation.definition.heading.end.markdown.morkdown
+|^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+══╦══╦══
+      ╝    
+|     ^ meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+|^^^^^^^^^^ meta.paragraph.markdown - markup.heading - punctuation.definition.heading
+
+══╦══╦══
+      ╚══════╝    
+|     ^^^^^^^^ punctuation.definition.heading.end.markdown.morkdown
+|^^^^^^^^^^^^^^^^^ markup.heading.0.markdown.morkdown
+
+
+## MO: Day heading - natural end
+══╦══╦══
+╚══════╝    
+
+|<- text.html.markdown - markup.heading
+
+══╦══╦══
+╚══════╝    
+blah
+|<-  text.html.markdown - markup.heading
+|^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+╚══════╝    
+║ wha ║
+|<-  text.html.markdown - markup.heading
+|^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+╚══════╝    
+╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+
+|<- text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+    
+|<-      text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+blah
+|<-  text.html.markdown - markup.heading
+|^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+║ wha ║
+|<-  text.html.markdown - markup.heading
+|^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+╚══════╝    
+    ╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^^^^^ text.html.markdown - markup.heading
+
+
+## MO: Day heading - unnatural end
+══╦══╦══
+
+|<- text.html.markdown - markup.heading
+
+══╦══╦══
+blah
+|<-  text.html.markdown - markup.heading
+|^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ wha ║
+
+|<-  text.html.markdown - markup.heading
+|^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+
+╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+
+|<- text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+    
+|<-      text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+blah
+|<-  text.html.markdown - markup.heading
+|^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+
+║ muuf ║
+|<-  text.html.markdown - markup.heading
+|^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+
+╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^ text.html.markdown - markup.heading
+
+══╦══╦══
+║ moof ║
+ 
+    ╚══════╝
+|<-  text.html.markdown - markup.heading
+|^^^^^^^^^^^ text.html.markdown - markup.heading
+
+
+
