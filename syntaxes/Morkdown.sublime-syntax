@@ -678,7 +678,7 @@ contexts:
     - include: list-block-content
 
   list-block-end:
-    - match: ^(?=\S)
+    - match: ^(?=[ \t]*(?:[^*•\d-][ \t\S]*)$)
       pop: true
 
   list-block-content:
