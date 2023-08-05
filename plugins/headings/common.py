@@ -35,7 +35,7 @@ DAY_HEADINGS_RE = re.compile(
 )
 
 
-def all_headings(view, start=0, end=None):
+def all_headings(view, start=0, end=None, include_text_in_results=False):
     if end is None:
         end = view.size()
     text = view.substr(sublime.Region(start, end))
@@ -45,12 +45,17 @@ def all_headings(view, start=0, end=None):
         if m.group(2):
             # ATX headings use group 2 (heading) and 3 (leading hashes)
             level = m.end(2) - m.start(2)
+            title = m.group(3)
         else:
             # SETEXT headings use group 4 (text) and 5 (underlines)
             level = 2 if text[m.start(5)] == "-" else 1
+            title = m.group(4)
         # ignore front matter and raw code blocks
         if view.match_selector(title_begin, "- markup.raw"):
-            yield (title_begin, title_end, level)
+            if include_text_in_results:
+                yield (title_begin, title_end, level, title)
+            else:
+                yield (title_begin, title_end, level)
     return None
 
 

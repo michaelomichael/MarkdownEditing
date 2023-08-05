@@ -148,6 +148,10 @@
 		"caption": "MarkdownEditing: Goto Next Day Heading",
 		"command": "mde_goto_next_day_heading"
 	},
+	{
+		"caption": "MarkdownEditing: Search Headings",
+		"command": "mde_search_headings"
+	},
 
 	//
 	// Folding

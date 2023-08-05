@@ -59,6 +59,7 @@ else:
         MdeMatchHeadingHashesCommand,
         MdeMatchHeadingHashesDetector,
         MdeUnsavedViewNameSetter,
+        MdeSearchHeadingsCommand,
     )
     from .plugins.lists import (
         MdeIndentListItemCommand,
