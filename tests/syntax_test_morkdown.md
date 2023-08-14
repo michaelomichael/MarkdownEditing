@@ -2966,6 +2966,15 @@ with a *second* line.
 
 # TEST: TABLES ################################################################
 
+End of a paragraph followed by...
+| foo | bar |
+|^^^^^^^^^^^^^ meta.table.header
+| <- punctuation.separator.table-cell
+|     ^ punctuation.separator.table-cell
+|           ^ punctuation.separator.table-cell
+| ^^^^ - punctuation.separator.table-cell
+
+
 | foo | bar |
 |^^^^^^^^^^^^^ meta.table.header
 | <- punctuation.separator.table-cell
@@ -3019,8 +3028,8 @@ test
 
 `|` this `|` example `|` is not a table `|`
 | ^ punctuation.definition.raw.end - meta.table
-| nor is this | because it is not at block level, it immediately follows a paragraph |
-| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph - meta.table
+| but this is | because it is at block level, it immediately follows a paragraph |
+| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.table - meta.paragraph
 
 | First Header  | Second Header | Third Header         |
 | :------------ | :-----------: | -------------------: |
@@ -3030,11 +3039,11 @@ test
 | ^^^^^^^^^^^^^^ meta.table
 |                                                     ^^ punctuation.separator.table-cell
 
- | table that doesn't start at column 0 |
-  | ---- |
-  | blah |
-| ^^^^^^^^ meta.table
-| ^ punctuation.separator.table-cell
+     | table that doesn't start at column 0 |
+      | ---- |
+      | blah |
+|     ^^^^^^^^ meta.table
+|     ^ punctuation.separator.table-cell
 
 not a table | 
 | ^^^^^^^^^^^^^ - meta.table

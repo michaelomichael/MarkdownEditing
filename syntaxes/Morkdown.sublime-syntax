@@ -106,7 +106,7 @@ variables:
       # at least 2 non-escaped pipe chars on the line
       (?:{{table_cell}}?\|){2}
 
-      # something other than whitespace followed by a pipe char or hyphon,
+      # something other than whitespace followed by a pipe char or hyphen,
       # followed by something other than whitespace and the end of the line
     | (?! \s*\-\s+ | \s+\|){{table_cell}}\|(?!\s+$)
     )
@@ -244,6 +244,7 @@ variables:
        |  {{thematic_break}}          # line is a thematic beak
        |  {{first_list_item}}         # a list item begins the line
        |  {{html_block}}              # a html block begins the line
+       |  {{table_first_row}}         # MO morkdown special
        )
     )
 
