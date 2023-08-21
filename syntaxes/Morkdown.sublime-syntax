@@ -13,16 +13,16 @@ file_extensions:
   - morkdown
 
 variables:
-  atx_heading: (?:[ ]*[#]{1,6}(?:[ \t]|$))         # between 0 and 3 spaces, followed 1 to 6 hashes, followed by at least one space or tab or by end of the line
+  atx_heading: (?:[ \t]*[#]{1,6}(?:[ \t]|$))         # between 0 and 3 spaces, followed 1 to 6 hashes, followed by at least one space or tab or by end of the line
   atx_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `atx_heading_end` can fully match closing hashes
   atx_heading_end: (?:[ \t]+(#+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
-  setext_escape: ^(?=[ ]*(?:=+|-+)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
+  setext_escape: ^(?=[ \t]*(?:=+|-+)\s*$)            # between 0 and 3 spaces, followed by at least one hyphon or equal sign (setext underline can be of any length)
 
-  day_heading: (?:[ ]*[═╦]+(?:[ \t]*|$))         # between 0 and 3 spaces, followed by one or more box border characters, followed by at least one space/tab or by end of line
+  day_heading: (?:[ \t]*[═╦]+(?:[ \t]*|$))         # between 0 and 3 spaces, followed by one or more box border characters, followed by at least one space/tab or by end of line
   day_heading_space: (?:(?=[ \t]+#+[ \t]*$)|[ \t]+|$) # consume spaces only if heading is not empty to ensure `day_heading_end` can fully match closing hashes
   day_heading_end: (?:[ \t]+([═╦║╚╝]+))?[ \t]*($\n?)        # \n is optional so ## is matched as end punctuation in new document (at eof)
 
-  block_quote: (?:[ ]*(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
+  block_quote: (?:[ \t]*(>)[ ]?)                     # between 0 and 3 spaces, followed by a greater than sign, (followed by any character or the end of the line = "only care about optional space!")
   # indented_code_block: (?:[ ]{4}|[ ]{0,3}\t)          # a visual tab of width 4 consisting of 4 spaces or 0 to 3 spaces followed by 1 tab
 
   first_list_item: (?:[ \t]*(?:1[.)]|[*+•-])\s)       # optional spaces/tabs, followed by either: at least one integer and a full stop or a parenthesis, or (a star, plus, or dash), followed by whitespace
@@ -30,7 +30,7 @@ variables:
 
   thematic_break: |-
     (?x:
-      [ ]*                       # zero or more spaces
+      [ \t]*                       # zero or more spaces
       (?:                        # followed by one of the following:
         [-](?:[ \t]*[-]){2,}     # - a dash,        followed by the following at least twice: any number of spaces or tabs followed by a dash
       | [*](?:[ \t]*[*]){2,}     # - a star,        followed by the following at least twice: any number of spaces or tabs followed by a star

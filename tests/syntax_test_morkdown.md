@@ -3205,6 +3205,14 @@ bar
 |     ^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
 | MO: Removed indented raw code blocks
 
+         > # Foo
+         > bar
+         > baz
+|^^^^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
+|        ^ markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.raw
+|          ^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
+| MO: Removed indented raw code blocks
+
 ## https://spec.commonmark.org/0.30/#example-232
 
 > # Foo
