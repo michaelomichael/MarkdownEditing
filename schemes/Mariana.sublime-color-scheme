@@ -206,7 +206,7 @@
 		// Tables
 		{
 			"name": "Markdown: Table Separators / Lines",
-			"scope": "text.html.markdown meta.table.header-separator punctuation.section, text.html.markdown punctuation.section.table-header, text.html.markdown punctuation.separator.table-cell",
+			"scope": "text.html.markdown meta.table.border, text.html.markdown meta.table.header-separator punctuation.section, text.html.markdown punctuation.section.table-header, text.html.markdown punctuation.separator.table-cell",
 			"foreground": "var(blue4)"
 		},
 		{

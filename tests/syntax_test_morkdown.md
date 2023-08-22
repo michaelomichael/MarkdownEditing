@@ -2964,6 +2964,8 @@ with a *second* line.
 |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw
 | MO: Removed indented raw code blocks
 
+
+
 # TEST: TABLES ################################################################
 
 End of a paragraph followed by...
@@ -3046,7 +3048,7 @@ test
 |     ^ punctuation.separator.table-cell
 
 not a table | 
-| ^^^^^^^^^^^^^ - meta.table
+|^^^^^^^^^^^^^ - meta.table
 
  abc | def
  --- | ---
@@ -3123,6 +3125,45 @@ A line without bolded |
 
 A line with bolded **|**
 |                    ^ - punctuation.separator.table-cell
+
+
+# TEST: TABLE BOX BORDERS #####################################################
+
++-----+-----+ 
+| <-           meta.table.border
+|^^^^^^^^^^^^^ meta.table.border
+
+|blah | blah|
++-----+-----+ 
+| <-           meta.table.border
+|^^^^^^^^^^^^^ meta.table.border
+
++-----+-----+
+|blah | blah|
++-----+-----+ 
+| <-           meta.table.border
+|^^^^^^^^^^^^^ meta.table.border
+
+Some paragraph text
++-----+-----+ 
+| <-           meta.table.border
+|^^^^^^^^^^^^^ meta.table.border
+
+      Some paragraph text
+      +-----+-----+ 
+|     ^^^^^^^^^^^^^ meta.table.border
+      
+      +-----+-----+ 
+|     ^^^^^^^^^^^^^ meta.table.border
+      
+      |blah | blah|
+      +-----+-----+ 
+|     ^^^^^^^^^^^^^ meta.table.border
+      
+      +-----+-----+
+      |blah | blah|
+      +-----+-----+ 
+|     ^^^^^^^^^^^^^ meta.table.border
 
 
 # TEST: BLOCK QUOTES ##########################################################

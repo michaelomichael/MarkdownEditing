@@ -106,9 +106,21 @@ variables:
       # at least 2 non-escaped pipe chars on the line
       (?:{{table_cell}}?\|){2}
 
-      # something other than whitespace followed by a pipe char or hyphen,
+      # or something other than whitespace followed by a pipe char or hyphen,
       # followed by something other than whitespace and the end of the line
     | (?! \s*\-\s+ | \s+\|){{table_cell}}\|(?!\s+$)
+    )
+
+  table_box_border_row: |-
+    (?x:
+      \s*
+      
+      # a plus, then a minus, then some more plusses and minuses
+      [+]
+      -
+      [+-]*
+      \s*   # Optional whitespace at end of line
+      $
     )
 
   fenced_code_block_start: |-
@@ -245,6 +257,7 @@ variables:
        |  {{first_list_item}}         # a list item begins the line
        |  {{html_block}}              # a html block begins the line
        |  {{table_first_row}}         # MO morkdown special
+       |  {{table_box_border_row}}         # MO morkdown special
        )
     )
 
@@ -2506,6 +2519,11 @@ contexts:
   tables:
     - match: ^(?={{table_first_row}})
       push: table-header
+    - match: ^{{table_box_border_row}}
+      scope: meta.table.border.top.markdown-gfm.morkdown
+
+  table-box-border-start-row:
+    - meta_content_scope: meta.table.border.top.markdown-gfm.morkdown
 
   table-header:
     - meta_content_scope: meta.table.header.markdown-gfm.morkdown
@@ -2533,6 +2551,11 @@ contexts:
     - meta_content_scope: meta.table.markdown-gfm.morkdown
     - include: table-end
     - include: table-cell-content
+    - include: table-box-border-end-row
+
+  table-box-border-end-row:
+    - match: ^{{table_box_border_row}}
+      scope: meta.table.border.bottom.markdown-gfm.morkdown
 
   table-end:
     # The table is broken at the first empty line, or beginning of another block-level structure
