@@ -157,7 +157,7 @@
 			"name": "Markdown: Block Quotes",
 			"scope": "text.html.markdown markup.quote punctuation.definition.blockquote, text.html.markdown markup.quote punctuation.definition.quote, text.html.markdown markup.quote",
 			"foreground": "var(orange2)",
-			"background": "var(blue2)"
+			"background": "var(grey)"
 		},
 
 		// Code Blocks
