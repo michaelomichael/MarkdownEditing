@@ -114,7 +114,7 @@ variables:
   table_box_border_row: |-
     (?x:
       \s*
-      
+
       # a plus, then a minus, then some more plusses and minuses
       [+]
       -
@@ -2529,7 +2529,7 @@ contexts:
     - meta_content_scope: meta.table.header.markdown-gfm.morkdown
     - match: \n
       set: table-header-separator-begin
-    - include: table-cell-content
+    - include: mo-table-cell-header-content
 
   table-header-separator-begin:
     - match: ^(?=[-|:\s]+$)
@@ -2571,6 +2571,7 @@ contexts:
       pop: true
 
   table-cell-content:
+    - include: mo-table-cell-horizontal-line-outside-of-header
     - match: (?={{balanced_emphasis}})
       push: table-cell-emphasis
     - match: (?!{{backticks}})`+
@@ -2580,6 +2581,32 @@ contexts:
     - include: literals
     - include: links
     - include: markups
+
+  mo-table-cell-horizontal-line-outside-of-header:
+    - match: (?<=\|)(\:?)(-+)(\:?)(?=\|)
+      captures:
+        1: punctuation.definition.table-cell-alignment.markdown.morkdown
+        2: punctuation.section.table-header.markdown.morkdown
+        3: punctuation.definition.table-cell-alignment.markdown.morkdown
+
+  mo-table-cell-header-content:  # Matches a whole line's worth of multiple cells
+    - match: ^\s+(?=|) # Ignore leading whitespace in the line
+    - match: (\|)\s*$  # Special rule to detect the final pipe in the line, mimics behaviour in the parent `table-header` rule
+      captures:
+        1: punctuation.separator.table-cell.markdown.morkdown
+      set: table-header-separator-begin
+    - match: \|
+      scope: punctuation.separator.table-cell.markdown.morkdown
+    - match: '(?=[^|\n]*)' # Everything other than a pipe or newline
+      scope: meta.table.cell-content.markdown.morkdown
+      push: mo-table-single-cell-content
+
+  # Only used by headers at the moment
+  mo-table-single-cell-content:
+    - meta_content_scope: meta.table.cell-content.markdown.morkdown
+    - match: (?=\n|\|)  # Bail out just before we chomp a pipe or newline
+      pop: true
+    - include: table-cell-content # There's also a `|` match in here, but the one above should take priority
 
   table-cell-emphasis:
     - include: emphasis
