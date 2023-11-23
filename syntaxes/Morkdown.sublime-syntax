@@ -1999,7 +1999,7 @@ contexts:
         0: meta.code-fence.definition.begin.kotlin.markdown-gfm.morkdown
         2: punctuation.definition.raw.code-fence.begin.markdown.morkdown
         5: constant.other.language-name.markdown.morkdown
-      embed: scope:source.kotlin
+      embed: scope:source.Kotlin
       embed_scope: markup.raw.code-fence.kotlin.markdown-gfm.morkdown
       escape: '{{fenced_code_block_escape}}'
       escape_captures:
