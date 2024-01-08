@@ -1,7 +1,7 @@
 // This patch for Mariana.sublime-color-scheme adds some Markdown specific color definitions
 // while making use of well defined colors for code blocks.
 //
-// Colours defined in Mariana:
+// Colours defined in Mariana (/Applications/Sublime Text.app/Contents/MacOS/Packages/Color Scheme - Default.sublime-package):
 //     - black
 //     - blue
 //     - blue
@@ -25,13 +25,14 @@
 {
 	"variables": {
 		"blue1": "hsla(210, 13%, 40%, 0.3)",
+		"pink2": "hsl(300, 10%, 45%)",
 		"line_break": "hsl(210, 15%, 20%)",
 		"raw_fg": "hsl(210, 10%, 60%)",
 		"raw_bg": "hsl(210, 15%, 20%)",
 		"tickbox_todo": "var(red)",
 		"tickbox_started": "var(orange3)",
 		"tickbox_done": "hsl(114, 20%, 50%)",
-		"tickbox_abandoned": "var(raw_fg)"
+		"tickbox_abandoned": "var(raw_fg)",
 	},
 	"rules": [
 		{
@@ -164,8 +165,7 @@
 		{
 			"name": "Markdown: Block Quotes",
 			"scope": "text.html.markdown markup.quote punctuation.definition.blockquote, text.html.markdown markup.quote punctuation.definition.quote, text.html.markdown markup.quote",
-			"foreground": "var(orange2)",
-			"background": "var(grey)"
+			"foreground": "var(pink2)"
 		},
 
 		// Code Blocks
