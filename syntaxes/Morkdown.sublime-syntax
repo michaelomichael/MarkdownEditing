@@ -657,6 +657,7 @@ contexts:
            |   {{thematic_break}}          # line is a thematic beak
            |   {{list_item}}               # a list item begins the line
            |   {{html_block}}              # a html block begins the line
+           |   \s*[^>]* $                  # MO: Any line without a '>'
            )
         )
       pop: true

@@ -1234,8 +1234,9 @@ https://spec.commonmark.org/0.30/#example-93
 > foo
 bar
 ===
-| <- markup.quote.markdown.morkdown - markup.heading
-|^^^ markup.quote.markdown.morkdown - markup.heading
+| <- markup.heading - markup.quote
+|^^^ markup.heading - markup.quote
+| MO: Updated so that newline ends a block quote
 
 https://spec.commonmark.org/0.30/#example-94
 - Foo
@@ -2954,7 +2955,7 @@ with a *second* line.
 > 
 >     not a code block
 | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.link - markup.raw
-| ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.link - markup.raw
+| ^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.link - markup.raw
 | MO: Removed indented raw code blocks
 
 > [^1]:
@@ -3243,7 +3244,7 @@ bar
     > baz
 |^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
 |   ^ markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.raw
-|     ^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
+|     ^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
 | MO: Removed indented raw code blocks
 
          > # Foo
@@ -3251,7 +3252,7 @@ bar
          > baz
 |^^^^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
 |        ^ markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown - markup.raw
-|          ^^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
+|          ^^^^ markup.quote.markdown.morkdown - punctuation - markup.raw
 | MO: Removed indented raw code blocks
 
 ## https://spec.commonmark.org/0.30/#example-232
@@ -3259,18 +3260,20 @@ bar
 > # Foo
 > bar
 baz
-| <- markup.quote.markdown.morkdown
-|^^^ markup.quote.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.quote
+|^^^ meta.paragraph.markdown.morkdown - markup.quote
+| MO: Updated so that newline ends a block quote
 
 ## https://spec.commonmark.org/0.30/#example-233
 
 > bar
 baz
-| <- markup.quote.markdown.morkdown
-|^^^ markup.quote.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.quote
+|^^^ meta.paragraph.markdown.morkdown - markup.quote
 > foo
 | <- markup.quote.markdown.morkdown punctuation.definition.blockquote.markdown.morkdown
 |^^^^^ markup.quote.markdown.morkdown - punctuation
+| MO: Updated so that newline ends a block quote
 
 ## https://spec.commonmark.org/0.30/#example-234
 
@@ -3300,8 +3303,9 @@ ___
 
 >     foo
     bar
-| <- markup.paragraph.markdown.morkdown - markup.raw
-|^^^ markup.paragraph.markdown.morkdown - markup.raw
+| <- meta.paragraph.markdown.morkdown - markup.quote - markup.raw
+|^^^ meta.paragraph.markdown.morkdown - markup.quote - markup.raw
+| MO: Updated so that newline ends a block quote
 | MO: Removed indented raw code blocks
 | MO: Why is it markup.paragraph.markdown.morkdown and not meta.paragraph.markdown?
 
@@ -3389,8 +3393,9 @@ foo
 
 > bar
 baz
-| <- markup.quote.markdown.morkdown
-|^^^ markup.quote.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.quote
+|^^ meta.paragraph.markdown.morkdown - markup.quote
+| MO: Updated so that newline ends a block quote
 
 ## https://spec.commonmark.org/0.30/#example-248
 
@@ -3419,8 +3424,9 @@ baz
 
 > > > foo
 bar
-| <- markup.quote.markdown.morkdown
-|^^^ markup.quote.markdown.morkdown
+| <- meta.paragraph.markdown.morkdown - markup.quote
+|^^ meta.paragraph.markdown.morkdown - markup.quote
+| MO: Updated so that newline ends a block quote
 
 ## https://spec.commonmark.org/0.30/#example-251
 
@@ -3483,7 +3489,8 @@ bar
 >    > this is a nested quote but no code in a block quote
 >     > with a second line of content
 | <- punctuation.definition.blockquote
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.raw
+|^^^^^ markup.quote.markdown.morkdown - markup.raw
+|       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.raw
 |     ^ punctuation.definition.blockquote - markup.raw
 | MO: Removed indented raw code blocks
 > 
@@ -3530,8 +3537,9 @@ bar
 
 > Block quote followed by invalid list
 1234567890. no list item
-| <- markup.quote.markdown.morkdown - markup.list
-|^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown - markup.list
+| <- meta.paragraph.markdown.morkdown - markup.quote - markup.list
+|^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.quote - markup.list
+| MO: Updated so that newline ends a block quote
 
 > Block quote followed by html block
 <p>*no-markdown</p>
@@ -4512,7 +4520,7 @@ foo
       |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
       > A block quote.
-      | ^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
+      | ^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-288
 
@@ -4554,7 +4562,7 @@ with two lines.
       |^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.raw - markup.list
 
       > A block quote.
-      | ^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
+      | ^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
 
 ## https://spec.commonmark.org/0.30/#example-291
 
@@ -5548,8 +5556,9 @@ paragraph
 
        > Block quote followed by invalid list
        1234567890. no list item
-       | <- markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
-       |^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown - markup.list
+       | <- meta.paragraph.markdown.morkdown - markup.quote - markup.list
+       |^^^^^^^^^^^^^^^^^^^^^^^^ meta.paragraph.markdown.morkdown - markup.quote - markup.list
+       | MO: Updated so that newline ends a block quote
 
        > Block quote followed by html block
        <p>*no-markdown</p>
@@ -5650,9 +5659,12 @@ paragraph
        >    > this is a nested quote and no longer a code block
        >     > with a second line of content
        | <- punctuation.definition.blockquote
-       |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
+       |^^^^^   markup.quote.markdown.morkdown 
+       |      ^ markup.quote.markdown.morkdown 
+       |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.quote.markdown.morkdown markup.paragraph.markdown.morkdown
        |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - markup.raw
        | MO: Removed indented raw code blocks
+       | MO: Updated so that newline ends a block quote
        
        >     > this is no longer code in a block quote, so it's still a nested quote
        | <- punctuation.definition.blockquote
@@ -5746,7 +5758,7 @@ blah*
 | ^ punctuation.definition.raw.begin.markdown.morkdown
 |      ^ punctuation.definition.raw.end.markdown.morkdown
 |        ^ - punctuation
-|          ^^^^^^^^^^^^^^^^^^^ meta.tag.inline.a.html 
+|          ^^^^^^^^^^^^^^^^^^^ meta.tag.inline.any.html 
 
 - list item
 
@@ -6007,7 +6019,7 @@ foo
 ## https://spec.commonmark.org/0.30/#example-344
 
 <a href="`">`
-| ^^^^^^^^^ meta.tag.inline.a
+| ^^^^^^^^^ meta.tag.inline.any.html
 |           ^ punctuation.definition.raw.begin
 
 | <- invalid.illegal.non-terminated.raw
