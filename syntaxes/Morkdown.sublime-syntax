@@ -994,6 +994,7 @@ contexts:
     - include: fenced-html-php
     - include: fenced-html
     - include: fenced-java
+    - include: fenced-java-props
     - include: fenced-javascript
     - include: fenced-jsonc
     - include: fenced-jspx
@@ -1322,6 +1323,23 @@ contexts:
       escape: '{{fenced_code_block_escape}}'
       escape_captures:
         0: meta.code-fence.definition.end.java.markdown-gfm.morkdown
+        1: punctuation.definition.raw.code-fence.end.markdown.morkdown
+
+  fenced-java-props:
+    - match: |-
+         (?x)
+          {{fenced_code_block_start}}
+          ((?i:java-props|java-properties|properties))
+          {{fenced_code_block_trailing_infostring_characters}}
+      captures:
+        0: meta.code-fence.definition.begin.java-props.markdown-gfm.morkdown
+        2: punctuation.definition.raw.code-fence.begin.markdown.morkdown
+        5: constant.other.language-name.markdown.morkdown
+      embed: scope:source.java-props
+      embed_scope: markup.raw.code-fence.java-props.markdown-gfm.morkdown
+      escape: '{{fenced_code_block_escape}}'
+      escape_captures:
+        0: meta.code-fence.definition.end.java-props.markdown-gfm.morkdown
         1: punctuation.definition.raw.code-fence.end.markdown.morkdown
 
   fenced-javascript:

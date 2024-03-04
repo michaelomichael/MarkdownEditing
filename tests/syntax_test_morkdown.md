@@ -1835,6 +1835,44 @@ var_dump(expression);
 |^^ meta.code-fence.definition.end.html-php.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
 | MO: Changed from `text.html.basic` to `text.html.php`. Presumably something's changed in the PHP parser since this was first written
 
+```java
+| <- punctuation.definition.raw.code-fence.begin
+|  ^^ constant.other.language-name
+for (var i = 0; i < 10; i++) {
+| ^ source.java keyword.control.loop
+    console.log(i);
+}
+```
+| <- meta.code-fence.definition.end.java.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+|^^ meta.code-fence.definition.end.java.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+
+```java-props
+| <- punctuation.definition.raw.code-fence.begin
+|  ^^ constant.other.language-name
+property.one=value one
+| <- source.java-props entity.name.key.java-props
+```
+| <- meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+|^^ meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+
+```java-properties
+| <- punctuation.definition.raw.code-fence.begin
+|  ^^ constant.other.language-name
+property.one=value one
+| <- source.java-props entity.name.key.java-props
+```
+| <- meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+|^^ meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+
+```properties
+| <- punctuation.definition.raw.code-fence.begin
+|  ^^ constant.other.language-name
+property.one=value one
+| <- source.java-props entity.name.key.java-props
+```
+| <- meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+|^^ meta.code-fence.definition.end.java-props.markdown-gfm.morkdown punctuation.definition.raw.code-fence.end.markdown.morkdown
+
 ```js
 | <- punctuation.definition.raw.code-fence.begin
 |  ^^ constant.other.language-name
