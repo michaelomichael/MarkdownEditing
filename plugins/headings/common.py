@@ -9,6 +9,7 @@ HEADINGS_RE = re.compile(
     (?:
       ( \#{1,6} ) [ \t]+ ( [^\n]+ )               # ATX headings
     | ( [^-=#\s][^|\n]* ) \n \1 ( -{3,} | ={3,} ) # SETEXT headings
+    | ( \u2551 \s [0-9A-Za-z ]+ \u2551 )          # Day header with box border
     ) [ \t]*$                                     # maybe trailing whitespace
     """,
     re.X | re.M,
