@@ -24,7 +24,7 @@ DAY_HEADINGS_RE = re.compile(
             \d{1,2} [ ] [A-Z][a-z]{2,3} [ ] 20\d{2}
           )
         |       # New-style headers (box border)
-          [\u2550x\u2566]+ [ ]* \n    # straight line (═ and ╦) on line 1
+          [\u2550x\u2566\u2554\u2557]+ [ ]* \n    # straight line (═ and ╦) or box top (╔, ═, and ╗) on line 1
           [ ]* \u2551[ ]              # date on line two between ║ symbols
           (
             \d{1,2} [ ] [A-Za-z]{3,4} [ ] \d{4}

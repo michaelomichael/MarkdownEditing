@@ -15,12 +15,18 @@
 			s/^\s*//g;							# strip leading whitespace
 			s/\s+#+\s*\z//g;					# strip trailing hashes
 			s/\s+/ /g;							# convert (multiple) whitespace to one space
-			s/^#{6}/          /g;				# indent atx heading 6
-			s/^#{5}/        /g;					# indent atx heading
-			s/^#{4}/      /g;					# indent atx heading
-			s/^#{3}/    /g;						# indent atx heading
-			s/^#{2}/  /g;						# indent atx heading
-			s/^#{1}//g;							# indent atx heading
+			s/^#{6}/               -/g;				# indent atx heading 6
+			s/^#{5}/            -/g;					# indent atx heading
+			s/^#{4}/         -/g;					# indent atx heading
+			s/^#{3}/      -/g;						# indent atx heading
+			s/^#{2}/   -/g;						# indent atx heading
+			s/^#{1}/#/g;							# indent atx heading
+
+			# Handle level-0 morkdown headings
+			s/^([═╦╔╗]+)[\n\s]*║ (\d [^║]+)║\s*[\n\s]*([╚═╝]+)/═════════  $2═════════════════════════════════════════════════/g;
+			s/^([═╦╔╗]+)[\n\s]*║ (\d\d [^║]+)║\s*[\n\s]*([╚═╝]+)/═════════ $2═════════════════════════════════════════════════/g;
+			s/^([═╦╔╗]+)[\n\s]*║ ([^║]+)║\s*[\n\s]*([╚═╝]+)/═════════ $2═════════════════════════════════════════════════/g;
+
 			s/^(.+?)=+\s*\z/$1/g;				# indent SETEXT heading 1
 			s/^(.+?)-+\s*\z/  $1/g;				# indent SETEXT heading 2
 		]]></string>
